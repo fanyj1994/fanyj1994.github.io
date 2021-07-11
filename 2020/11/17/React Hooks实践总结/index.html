@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <title>范永健的Blog - 不经审视的人生不值一过</title>
+    
+      <link rel="icon" href="/img/favicon.ico">
+    
+    <meta name="keyword"  content="">
+    
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <div class="loading-wrapper">
+    <div class="loading">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+  <div class="page">
+    <div class="head">
+      <header class="head-header">
+  <h1 class="head-authorH">
+    <a href="/" class="head-authorLink">
+      范永健的Blog</a>
+  </h1>
+  <div class="head-right">
+    <!-- <div class="head-search">
+      <input class="head-searchK"></input>
+      <span class="head-searchT">
+        </span>
+    </div> -->
+    <button class="barWrap" id="barWrap-toggle">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </button>
+    <div class="head-about" id="head-about">
+      
+      <a class="head-aboutLink" href="/about">
+        关于</a>
+      
+    </div>
+  </div>
+</header>
+    </div>
+    <div class="main">
+      <div class="barShow-head" id="barShow">
+  <ul class="barShow-ul">
+    
+      <li class="barShow-item">
+        <a href="/archives"><span>
+            Archives</span></a>
+      </li>
+    
+      <li class="barShow-item">
+        <a href="/categories/posts1"><span>
+            Posts1</span></a>
+      </li>
+    
+      <li class="barShow-item">
+        <a href="/categories/your-link"><span>
+            Posts2</span></a>
+      </li>
+    
+      <li class="barShow-item">
+        <a href="/tags"><span>
+            Tags</span></a>
+      </li>
+    
+  </ul>
+</div>
+      <article class="post" id="post">
+  <header class="post-head">
+    <h1 class="post-title">
+      <a class="title" href="/2020/11/17/React%20Hooks%E5%AE%9E%E8%B7%B5%E6%80%BB%E7%BB%93/">
+        React Hooks 实践总结
+      </a>
+    </h1>
+  </header>
+  <div class="post-datetag">
+    <div class="post-date">
+      <time class="post-time" title="2020-11-17 12:40:00" datetime="2020-11-17T04:40:00.000Z" itemprop="datePublished">
+  2020-11-17</time>
+    </div>
+    <div class="post-tag">
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React/" rel="tag">React</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a></li></ul>
+
+    </div>
+  </div>
+
+  
+    <div class="post-cc">
+      版权声明：
+        
+          署名-非商业性使用-相同方式共享 | <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/2.5/cn/">CC BY-NC-SA 2.5 CN</a>
+        
+    </div>
+  
+
+  <div class="article-entry" itemprop="articleBody">
+    <p>最近一年几乎都在使用 TypeScript + Hooks 编写函数式组件，这一篇是我使用 hooks 的一些总结。</p>
+<p>开始之前，看一个经典的计数器例子：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Counter</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> [count, setCount] = useState(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="xml">      <span class="tag">&lt;<span class="name">p</span>&gt;</span>点击了 &#123;count&#125; 次<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></span><br><span class="line"><span class="xml">      <span class="tag">&lt;<span class="name">button</span> <span class="attr">onClick</span>=<span class="string">&#123;()</span> =&gt;</span> setCount(count + 1)&#125;&gt;Click<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="每一帧都是独立的"><a href="#每一帧都是独立的" class="headerlink" title="每一帧都是独立的"></a>每一帧都是独立的</h4><blockquote>
+<p>任意一次渲染中的<code>count</code>常量都不会随着时间改变。渲染输出会变是因为我们的组件被一次次调用，而每一次调用引起的渲染中，它包含的<code>count</code>值独立于其他渲染。 —— Dan Abramov</p>
+</blockquote>
+<p>在 React 组件中，通过改变状态来触发组件的重新 render，每次渲染都可以理解为一<strong>帧</strong>。在每一帧中，状态只是一个普通的变量，render 的时候，它都是独立不变的。</p>
+<p>也就是说，在每次渲染中，所有的 state、props 以及 effects 在组件的<strong>任意位置</strong>都是固定的，我们无法直接获取过去或者未来渲染周期的状态。</p>
+<p>state 变化，引发了视图的更新，从直觉上看来，这里是不是使用了数据绑定或者，观察者之类的高级技巧，实际上不是的，它只是函数的重复调用而已，count 是每次调用都独立的局部变量。</p>
+<h4 id="更新-state"><a href="#更新-state" class="headerlink" title="更新 state"></a>更新 state</h4><p>在 react 中，state 或者 props 的改变，都会触发重新渲染。函数式组件以参数的形式接受 props，props 变化，整个组件都会重新渲染。<code>useState</code>在函数式组件内部创建了状态，并提供了一个改变状态的方法。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> [count, setCount] = useState(<span class="number">0</span>);</span><br></pre></td></tr></table></figure>
+
+<p>几个值得注意的点：useState 的初始值可以是一个简单类型，也可以是复杂类型。同时它还可以接收一个函数，将函数的返回值作为该 state 的初始值。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> a = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">const</span> b = <span class="number">2</span>;</span><br><span class="line"><span class="keyword">const</span> [count, setCount] = useState(<span class="function">() =&gt;</span> a + b);</span><br></pre></td></tr></table></figure>
+
+<p>既然每一帧的渲染中，state 都是独立的，其实就会有一个问题，当我们执行完 setCount 之后，并不会立即拿到最新的 count 的值：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> [count, setCount] = useState(<span class="number">0</span>);</span><br><span class="line">setCount(count + <span class="number">1</span>);</span><br><span class="line"><span class="built_in">console</span>.log(count); <span class="comment">// 0</span></span><br></pre></td></tr></table></figure>
+
+<p>也就是说，count 的值在本次渲染周期内是固定不变的，直到下一次渲染，count 才会更新为 1.这也是为什么感觉 state 的改变是异步的原因。</p>
+<h4 id="获取未来或者过去的-state"><a href="#获取未来或者过去的-state" class="headerlink" title="获取未来或者过去的 state"></a>获取未来或者过去的 state</h4><p>如果想要获取到最新的 state 值，则可以通过给 setCount 方法传入一个函数来执行。</p>
+<p>还有一种方法就是使用 <code>useRef</code>，它是一个所有帧共享的变量，你可以在任何时间改变它，然后在它未来的帧中访问它。也就是说，useRef 可以为渲染视图的特定一帧打一个快照进行保存。</p>
+<h4 id="什么样的数据需要保存为内部-state"><a href="#什么样的数据需要保存为内部-state" class="headerlink" title="什么样的数据需要保存为内部 state"></a>什么样的数据需要保存为内部 state</h4><p>在实际使用中，一个组件可能会出现大量的 <code>useState</code>定义，这个时候，我们需要回头反思，如此多的 state 定义是否有必要？</p>
+<p>我们知道，react 状态的变化会引发视图的更新，所以将一个变量定义为 state 的标准是：<strong>它的改变需要直接引发视图的更新？</strong>如果答案是否定的，那就完全不必定义一个 state 出来，而是通过一般的变量将其缓存起来。或者说，使用 <code>useRef</code>是一种不错的选择。</p>
+<h4 id="管理复杂状态的两种选择：-useReducer-useContext"><a href="#管理复杂状态的两种选择：-useReducer-useContext" class="headerlink" title="管理复杂状态的两种选择： useReducer + useContext"></a>管理复杂状态的两种选择： useReducer + useContext</h4><p>对于一些需要全局使用的状态，如果需要在多层组件之间传递更新数据，这很容易造成逻辑混乱且不可追踪，则可以通过 useContext 来简化这一过程，以避免显示地在每一层组件之间传递 props，子组件可以在任何地方访问到该 context 的值。在下面的例子中，我们将终端的平台和版本通过 context 注入：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> client = &#123;</span><br><span class="line">  <span class="attr">mobile</span>: &#123;</span><br><span class="line">    <span class="attr">system</span>: <span class="string">&quot;android&quot;</span>,</span><br><span class="line">    <span class="attr">version</span>: <span class="string">&quot;8.0.0&quot;</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">mac</span>: &#123;</span><br><span class="line">    <span class="attr">system</span>: <span class="string">&quot;MacOS&quot;</span>,</span><br><span class="line">    <span class="attr">version</span>: <span class="string">&quot;11.0.1&quot;</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">const</span> ClientContext = React.CreateContext(&#123;&#125;);</span><br><span class="line"><span class="keyword">const</span> App = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="xml"><span class="tag">&lt;<span class="name">ClientContext.Provider</span> <span class="attr">value</span>=<span class="string">&#123;client.mac&#125;</span>&gt;</span></span></span><br><span class="line"><span class="xml">      <span class="tag">&lt;<span class="name">MyComponent</span> /&gt;</span></span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;/<span class="name">ClientContext.Provider</span>&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> MyComponent = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> client = useContext(ClientContext);</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="xml"><span class="tag">&lt;&gt;</span></span></span><br><span class="line"><span class="xml">      当前系统为&#123;client.system&#125;,系统版本为&#123;client.version&#125;</span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;/&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>在某一个节点注入 context，该组件及其所有下属组件都会共享这个 context。当该 context 的值发生变化时，其下的所有组件都会重新 render.</p>
+<p><code>useReducer</code>，是改变 state 的另一种方式。顾名思义，就是 reducer 的 hooks 用法。reducer 接受一个改变 state 的方法，以及触发方法的 action，计算之后，返回新的 state.类似于这样 <code>(state, action) =&gt; newState</code>.<code>useReducer</code>在某些复杂场景下比 <code>useState</code>更实用，例如一个操作会引发 N 多个 state 的更新，或者说，state 本身嵌套很多层，更新的逻辑易遗漏，维护起来一片凌乱等等场景。</p>
+<p>reducer 是一个纯函数，也就是说，它不包含任何 UI 和副作用操作。也就是说，只要输入的值不变，其输出的值也不会改变。</p>
+<p>同样地，reducer 中的数据是 immutable 的，不要直接改变输入的 state，而是应该返回一个新的改变后的 state.</p>
+<p>action 是一个用 type 标识的动作，例如对计数器的 increase、decrease 等，在 reducer 中，可以根据 action type 的不同，采用不同的数据处理。同时，它可以接收第二个参数 payload，传入执行该 action 需要的额外数据。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> [state, dispatch] = useReducer(reducer, initialArg, init);</span><br></pre></td></tr></table></figure>
+
+<p><code>useReducer</code>接收一个 reducer 函数，以及一个初始的 state 值，暴露出计算之后的新 state，以及一个 dispatch 方法，它接收一个 action 为参数，用来触发相应的 reducer. 下面使用 <code>useReducer</code>重构计数器的例子：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> initialCount = &#123;</span><br><span class="line">  <span class="attr">count</span>: <span class="number">0</span>,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> countReducer = <span class="function">(<span class="params">state, action</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">switch</span> (action.type) &#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="string">&quot;increase&quot;</span>:</span><br><span class="line">      <span class="keyword">return</span> &#123; <span class="attr">count</span>: state.count + <span class="number">1</span> &#125;;</span><br><span class="line">    <span class="keyword">case</span> <span class="string">&quot;decrease&quot;</span>:</span><br><span class="line">      <span class="keyword">return</span> &#123; <span class="attr">count</span>: state.count - <span class="number">1</span> &#125;;</span><br><span class="line">    <span class="keyword">case</span> <span class="string">&quot;reset&quot;</span>:</span><br><span class="line">      <span class="keyword">return</span> &#123; <span class="attr">count</span>: action.payload &#125;;</span><br><span class="line">    <span class="keyword">default</span>:</span><br><span class="line">      <span class="keyword">return</span> initialCount;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="function"><span class="keyword">function</span> <span class="title">App</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> [state, dispatch] = useReducer(countReducer, initialCount);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">&quot;App&quot;</span>&gt;</span></span></span><br><span class="line"><span class="xml">      <span class="tag">&lt;<span class="name">h1</span>&gt;</span>&#123;state.count&#125;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span></span><br><span class="line"><span class="xml">      <span class="tag">&lt;<span class="name">button</span> <span class="attr">onClick</span>=<span class="string">&#123;()</span> =&gt;</span> dispatch(&#123; type: &quot;increase&quot; &#125;)&#125;&gt;+1<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line"><span class="xml">      <span class="tag">&lt;<span class="name">button</span> <span class="attr">onClick</span>=<span class="string">&#123;()</span> =&gt;</span> dispatch(&#123; type: &quot;decrease&quot; &#125;)&#125;&gt;-1<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line"><span class="xml">      <span class="tag">&lt;<span class="name">button</span></span></span></span><br><span class="line"><span class="tag"><span class="xml">        <span class="attr">onClick</span>=<span class="string">&#123;()</span> =&gt;</span> dispatch(&#123; type: &quot;reset&quot;, payload: initialCount.count &#125;)&#125;</span></span><br><span class="line"><span class="xml">      &gt;</span></span><br><span class="line"><span class="xml">        reset</span></span><br><span class="line"><span class="xml">      <span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在某些复杂的场景中，reducer 的引入实际上将复杂的 state 更新行为剥离出来，单独在 reducer 之中维护，而组件的核心交互逻辑我们只需要关照 dispatch 了哪个 action，这样使得代码可读性大大提高，组件的核心逻辑也会清晰明了。同时，对于不涉及多层组件交互的状态，并不适合使用 reducer 来维护，这样，反而增加了维护的复杂度。</p>
+<p>在一些复杂场景下，结合 <code>useContext</code>和<code>useReducer</code>可以发挥出十分强大的威力。一般的做法是，可以把 state 和 dispatch 方法通过 context 注入，这样，很方便地实现了状态的集中管理和更新。这种方法最好不要滥用，因为集中管理、处处可以变更的方式虽然看起来方便很多，但在 context 的作用范围处处都可以通过 dispatch 来更新 state，这样很容易造成 state 的更新不可追踪。</p>
+<p>一般情况下，这种模式适合多层组件状态交互十分密集，且数据具有较好的完整性和共享需要，整个 state 描述的是同一件事，而不是把任意的数据都塞进去维护，这样写起来一时爽，维护起来火葬场~</p>
+<h4 id="副作用管理"><a href="#副作用管理" class="headerlink" title="副作用管理"></a>副作用管理</h4><p><code>useEffect</code>和<code>useLayoutEffect</code>都是用来执行视图之外的副作用。前者在每次状态更新且视图也渲染完毕之后执行。后者则是在 DOM 更新完毕，但页面渲染之前执行，所以会阻塞页面渲染。</p>
+<p>如前所述，在每一帧的渲染中，<code>useEffect</code> 中使用的 state 和 props 也是独立不变的。</p>
+<p>可以通过给它传入第二个参数，一个依赖数组，来跳过不必要的副作用操作，React 通过对比依赖数组的值是否发生变化来决定是否执行副作用函数。当第二个参数为一个空数组的时候，意味着这个 Effects 只会执行一次。</p>
+<p>对于依赖数组，使用不当经常会遇到各种各样的重复渲染的情况。不要添加不必要的依赖在数组中，因为依赖项越多，意味着该 Effects 被多次执行的概览越大。例如，在下面的场景中，如果需要在 Effects 中更新 state，不必将该 state 传入依赖数组，而是通过给 setCount 传入回调的方式去获得当前 state：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">useEffect(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// setCount(count + 1); 这种方式会引入一个 state 的依赖项。</span></span><br><span class="line">  setCount(<span class="function">(<span class="params">count</span>) =&gt;</span> count + <span class="number">1</span>);</span><br><span class="line">&#125;, []);</span><br></pre></td></tr></table></figure>
+
+<p>在 React 官方的文档中，还提到了两种需要避免重复渲染的情况及处理方式：</p>
+<ol>
+<li>当依赖项中传入一个函数时，通过使用 <code>useCallback</code>来包裹函数避免函数反复被创建；</li>
+<li>当依赖项中传入数组或者对象等引用类型，通过使用 <code>useMemo</code>来缓存处理它。</li>
+</ol>
+<h4 id="使用-useMemo-和-useCallback"><a href="#使用-useMemo-和-useCallback" class="headerlink" title="使用 useMemo 和 useCallback"></a>使用 useMemo 和 useCallback</h4><p>如上所述，合理地使用 <code>useMemo</code>和<code>useCallback</code>能够避免不必要的渲染。当对象或者数组作为 props 传入的时候，可以使用 <code>useMemo</code>来缓存对象，使其在必要的时候更新：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> data = useMemo(<span class="function">() =&gt;</span> (&#123; id &#125;), [id]);</span><br><span class="line"></span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">ComponentA</span> <span class="attr">data</span>=<span class="string">&#123;data&#125;</span> /&gt;</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>只要 id 不变，Component 就不会重新渲染。</p>
+<p><code>useMemo</code> 同样可以用来缓存组件内部的部分 React Element ，以避免重复渲染并没有变化的部分。</p>
+<p>使用 <code>useMemo</code> 或者 <code>useCallback</code> 并不是绝对会提升性能。如果你缓存的数据永远不会改变或者说，每一次都会改变，那大可不必使用这两个 hooks，毕竟它们需要额外的计算成本以及存储空间，有的时候得不偿失。</p>
+<p>最后，在<a target="_blank" rel="noopener" href="https://zh-hans.reactjs.org/docs/thinking-in-react.html">React 哲学</a>一文中，官方给出了一种使用 React 来构建应用的思路，我觉得十分赞。这篇文章中提到，开始的时候，找出应用所需的最小集合，其他数组均有它们计算而出。</p>
+
+  </div>
+</article>
+
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#%E6%AF%8F%E4%B8%80%E5%B8%A7%E9%83%BD%E6%98%AF%E7%8B%AC%E7%AB%8B%E7%9A%84"><span class="post-toc-number">1.</span> <span class="post-toc-text">每一帧都是独立的</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#%E6%9B%B4%E6%96%B0-state"><span class="post-toc-number">2.</span> <span class="post-toc-text">更新 state</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#%E8%8E%B7%E5%8F%96%E6%9C%AA%E6%9D%A5%E6%88%96%E8%80%85%E8%BF%87%E5%8E%BB%E7%9A%84-state"><span class="post-toc-number">3.</span> <span class="post-toc-text">获取未来或者过去的 state</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#%E4%BB%80%E4%B9%88%E6%A0%B7%E7%9A%84%E6%95%B0%E6%8D%AE%E9%9C%80%E8%A6%81%E4%BF%9D%E5%AD%98%E4%B8%BA%E5%86%85%E9%83%A8-state"><span class="post-toc-number">4.</span> <span class="post-toc-text">什么样的数据需要保存为内部 state</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#%E7%AE%A1%E7%90%86%E5%A4%8D%E6%9D%82%E7%8A%B6%E6%80%81%E7%9A%84%E4%B8%A4%E7%A7%8D%E9%80%89%E6%8B%A9%EF%BC%9A-useReducer-useContext"><span class="post-toc-number">5.</span> <span class="post-toc-text">管理复杂状态的两种选择： useReducer + useContext</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#%E5%89%AF%E4%BD%9C%E7%94%A8%E7%AE%A1%E7%90%86"><span class="post-toc-number">6.</span> <span class="post-toc-text">副作用管理</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#%E4%BD%BF%E7%94%A8-useMemo-%E5%92%8C-useCallback"><span class="post-toc-number">7.</span> <span class="post-toc-text">使用 useMemo 和 useCallback</span></a></li></ol>
+        </nav>
+    </aside>
+   
+    </div>
+    <footer class="footer-nav">
+      <div class="footer">
+        <span class="footer-msg">
+  
+  2020
+  
+  
+    <span class="timeDivide">-</span>
+    2021
+  
+  范永健.&nbsp;
+  Power by
+  <a href="https://hexo.io/" target="_blank" rel="external nofollow">Hexo</a>
+  and
+  <a class="orangelink" href="https://github.com/" target="_blank" rel="">
+    hexo-theme-yuzu</a>
+</span>
+
+      </div>
+    </footer>
+    <div class="back-top" id="back-top">
+      <i class="back-top-icon"></i>
+    </div>
+    
+
+  <script src="/js/jquery/jquery-3.1.1.min.js"></script>
+
+    
+<script src="/js/theme.js"></script>
+
+    
+<script src="/js/index.js"></script>
+
+
+  </div>
+</body>

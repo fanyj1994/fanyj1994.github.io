@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <title>范永健的Blog - 不经审视的人生不值一过</title>
+    
+      <link rel="icon" href="/img/favicon.ico">
+    
+    <meta name="keyword"  content="">
+    
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <div class="loading-wrapper">
+    <div class="loading">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+  <div class="page">
+    <div class="head">
+      <header class="head-header">
+  <h1 class="head-authorH">
+    <a href="/" class="head-authorLink">
+      范永健的Blog</a>
+  </h1>
+  <div class="head-right">
+    <!-- <div class="head-search">
+      <input class="head-searchK"></input>
+      <span class="head-searchT">
+        </span>
+    </div> -->
+    <button class="barWrap" id="barWrap-toggle">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </button>
+    <div class="head-about" id="head-about">
+      
+      <a class="head-aboutLink" href="/about">
+        关于</a>
+      
+    </div>
+  </div>
+</header>
+    </div>
+    <div class="main">
+      <div class="barShow-head" id="barShow">
+  <ul class="barShow-ul">
+    
+      <li class="barShow-item">
+        <a href="/archives"><span>
+            Archives</span></a>
+      </li>
+    
+      <li class="barShow-item">
+        <a href="/categories/posts1"><span>
+            Posts1</span></a>
+      </li>
+    
+      <li class="barShow-item">
+        <a href="/categories/your-link"><span>
+            Posts2</span></a>
+      </li>
+    
+      <li class="barShow-item">
+        <a href="/tags"><span>
+            Tags</span></a>
+      </li>
+    
+  </ul>
+</div>
+      <article class="post" id="post">
+  <header class="post-head">
+    <h1 class="post-title">
+      <a class="title" href="/2017/04/19/2017-04-19-%E5%85%B3%E4%BA%8ECSS%E7%94%BB%E4%B8%89%E8%A7%92%E5%BD%A2%E7%9A%84%E9%82%A3%E4%BA%9B%E4%BA%8B%E5%84%BF/">
+        关于CSS画三角形的那些事儿
+      </a>
+    </h1>
+  </header>
+  <div class="post-datetag">
+    <div class="post-date">
+      <time class="post-time" title="2017-04-19 09:40:00" datetime="2017-04-19T01:40:00.000Z" itemprop="datePublished">
+  2017-04-19</time>
+    </div>
+    <div class="post-tag">
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a></li></ul>
+
+    </div>
+  </div>
+
+  
+    <div class="post-cc">
+      版权声明：
+        
+          署名-非商业性使用-相同方式共享 | <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/2.5/cn/">CC BY-NC-SA 2.5 CN</a>
+        
+    </div>
+  
+
+  <div class="article-entry" itemprop="articleBody">
+    <p>用CSS画一个三角形，是不难的问题，但我却掌握的不够熟练，例如当要求为画一个直角三角形或者等腰三角形，我就有点反应不过来。所以，在这篇中点透它，以后再见，不含糊。</p>
+<span id="more"></span>
+<h3 id="原理分析"><a href="#原理分析" class="headerlink" title="原理分析"></a>原理分析</h3><p>用CSS画三角形，实际上就是<strong>在一个框的四边上做文章</strong>，如果有一个div，为其设置100px的宽和高，并给其添加10px的黑色边框，这四条边形成一个闭合的正方形，那么这四条边如何分才能达到平均分配的效果呢？那只能是这样：</p>
+<p><img src="http://i2.muimg.com/567571/3c2fca68c1a482af.png" alt="边的分法"></p>
+<p>可以看到，每一条边单独拉出来看就是一个梯形，而用CSS画三角形其实就是从这个梯形下手，如何把这个梯形转换为一个三角形扥问题。</p>
+<p>其实原理很简单，当div的宽和高逐渐变小的时候，其中央的留白部分逐渐变小，四条边向中央收缩，例如，当宽高都变成50px的时候，就是这个样子了：</p>
+<p><img src="http://i1.piimg.com/567571/67cea8e18aa50ffd.png" alt="宽高变小时候的DIV"></p>
+<p>可以想象，当宽高为0的时候，中间的空白将不可见，而边框会恰好融合成为一个黑色的矩形，而此时，<strong>每一条边就是一个三角形</strong>，当为四条边添加不同的颜色，并增大边框宽度之后，可以明晰地看出此时各边的形态：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">div</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">0</span>; </span><br><span class="line">    <span class="attribute">height</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">border-width</span>: <span class="number">50px</span>;</span><br><span class="line">    <span class="attribute">border-style</span>: solid;</span><br><span class="line">    <span class="attribute">border-color</span>: green yellow black orange;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="http://i4.buimg.com/567571/f839ed913fad303e.png" alt="宽高为0"></p>
+<p>这时候就很清晰了，我们只需要使其中三条边不可见，则可见的部分就是一个三角形。为达目的，很简单，将三条边颜色设置为<strong>透明</strong>即可以。<br><code>border-color: transparent transparent black transparent;</code></p>
+<p>当当当当~效果如下：</p>
+<p><img src="http://i1.piimg.com/567571/420a6e2404aaa419.png" alt="三角形"></p>
+<p>这个时候，其他三个边是存在的，只不过是透明的，那么，我们可不可以直接将其他三条边取消呢？——当然不可以，没有宽高度只有一条边，这个div还能够出现吗~</p>
+<p>到此，最基本的三角形就简单地完成了，可以看到，三角形的高就是div的底边宽度，若要三角形更尖（斜度更大）一些，只需要加大底边的宽度即可。而底边的长度，则由两条侧边的宽度决定，两者加起来的宽度就是三角形底边的宽度，而div顶部的一条边框的宽度则只会影响三角形定点距离四条边形成矩形的顶部的距离。</p>
+<p>明白了原理之后，想画什么三角形就很简单了。例如，一个直角三角形，如果直角边为右边和底边的话，则需要将右边框设置为0了。也就是<code>border-right-width: 0;</code>若要一个钝角三角形，则将左右两边的边框宽度加大即可以。当然也可以作出各个朝向的三角形了。</p>
+<h3 id="实现一个收藏Icon"><a href="#实现一个收藏Icon" class="headerlink" title="实现一个收藏Icon"></a>实现一个收藏Icon</h3><p>学会了画三角形，还可以在此基础上来创造出许多形状的图形，例如下面这个常见的收藏图案：</p>
+<p><img src="http://i2.muimg.com/567571/7e6a793adfca92ba.png" alt="标签Icon"></p>
+<p>如何在一个div中使用CSS完成这样的效果呢？通过观察，不难发现，这个icon其实是一个正方形减去一个三角形构成的，所以我们的思路就很清晰了，将下面一个三角形变成透明就可以了~</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">div</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">border</span>: <span class="number">50px</span> solid <span class="number">#ff5500</span>; </span><br><span class="line">    <span class="attribute">border-bottom-color</span>: transparent;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="和伪元素结合实现双箭头"><a href="#和伪元素结合实现双箭头" class="headerlink" title="和伪元素结合实现双箭头"></a>和伪元素结合实现双箭头</h3><p>画一个三角形是很简单的，那么画一个像下面这样的双箭头呢？</p>
+<p><img src="http://i2.muimg.com/567571/d6cdf109d8fccc05.png" alt="双箭头"></p>
+<p>当然，可以用两个 div 来很快实现，但是为了不增加多余的标签，可以使用伪类实现这个效果。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">div</span>,</span><br><span class="line"><span class="selector-tag">div</span>:after &#123;</span><br><span class="line">    width: <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">display</span>: inline-block;</span><br><span class="line">    <span class="attribute">border</span>: <span class="number">50px</span>; </span><br><span class="line">    <span class="attribute">border-style</span>: solid;</span><br><span class="line">    <span class="attribute">border-color</span>: transparent <span class="number">#ff5500</span> transparent transparent;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-tag">div</span><span class="selector-pseudo">::after</span> &#123;</span><br><span class="line">    <span class="attribute">content</span>: <span class="string">&quot;&quot;</span>;</span><br><span class="line">    <span class="attribute">margin-top</span>: -<span class="number">50px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="实现Tips气泡"><a href="#实现Tips气泡" class="headerlink" title="实现Tips气泡"></a>实现Tips气泡</h3><p>同样借助伪元素，可以实现一个像下面这样的气泡。</p>
+<p><img src="http://i4.buimg.com/567571/59d93fa2641f11d6.png" alt="气泡"></p>
+<p>使用伪元素来实现气泡右端的直角三角形，通过<code>position: absolute;</code>来将它定位。代码如下：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">div</span> &#123;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">90px</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">40px</span>;</span><br><span class="line">  <span class="attribute">border-radius</span>: <span class="number">3px</span>;</span><br><span class="line">  <span class="attribute">background-color</span>: <span class="number">#009bdb</span>;</span><br><span class="line">  <span class="attribute">position</span>: relative; </span><br><span class="line">  <span class="attribute">color</span>: <span class="number">#fff</span>;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="number">14px</span>;</span><br><span class="line">  <span class="attribute">padding-left</span>: <span class="number">10px</span>;</span><br><span class="line">  <span class="attribute">line-height</span>: <span class="number">40px</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-tag">div</span>:after &#123;</span><br><span class="line">  content: <span class="string">&quot;&quot;</span>;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">display</span>: inline-block;</span><br><span class="line">  <span class="attribute">border-style</span>: solid;</span><br><span class="line">  <span class="attribute">border-width</span>: <span class="number">0</span> <span class="number">8px</span> <span class="number">8px</span> <span class="number">10px</span>;</span><br><span class="line">  <span class="attribute">border-color</span>: transparent transparent transparent <span class="number">#009bdb</span>;</span><br><span class="line">  <span class="attribute">position</span>: absolute;</span><br><span class="line">  <span class="attribute">top</span>: <span class="number">12px</span>; <span class="attribute">left</span>: <span class="number">100px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>从上面的例子可以看出，运用的原理大同小异，只要灵活变通，就可以实现形态各异的图形组合。</p>
+
+  </div>
+</article>
+
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90"><span class="post-toc-number">1.</span> <span class="post-toc-text">原理分析</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E6%94%B6%E8%97%8FIcon"><span class="post-toc-number">2.</span> <span class="post-toc-text">实现一个收藏Icon</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E5%92%8C%E4%BC%AA%E5%85%83%E7%B4%A0%E7%BB%93%E5%90%88%E5%AE%9E%E7%8E%B0%E5%8F%8C%E7%AE%AD%E5%A4%B4"><span class="post-toc-number">3.</span> <span class="post-toc-text">和伪元素结合实现双箭头</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E5%AE%9E%E7%8E%B0Tips%E6%B0%94%E6%B3%A1"><span class="post-toc-number">4.</span> <span class="post-toc-text">实现Tips气泡</span></a></li></ol>
+        </nav>
+    </aside>
+   
+    </div>
+    <footer class="footer-nav">
+      <div class="footer">
+        <span class="footer-msg">
+  
+  2020
+  
+  
+    <span class="timeDivide">-</span>
+    2021
+  
+  范永健.&nbsp;
+  Power by
+  <a href="https://hexo.io/" target="_blank" rel="external nofollow">Hexo</a>
+  and
+  <a class="orangelink" href="https://github.com/" target="_blank" rel="">
+    hexo-theme-yuzu</a>
+</span>
+
+      </div>
+    </footer>
+    <div class="back-top" id="back-top">
+      <i class="back-top-icon"></i>
+    </div>
+    
+
+  <script src="/js/jquery/jquery-3.1.1.min.js"></script>
+
+    
+<script src="/js/theme.js"></script>
+
+    
+<script src="/js/index.js"></script>
+
+
+  </div>
+</body>

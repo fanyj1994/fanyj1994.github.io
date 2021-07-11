@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <title>范永健的Blog - 不经审视的人生不值一过</title>
+    
+      <link rel="icon" href="/img/favicon.ico">
+    
+    <meta name="keyword"  content="">
+    
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <div class="loading-wrapper">
+    <div class="loading">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+  <div class="page">
+    <div class="head">
+      <header class="head-header">
+  <h1 class="head-authorH">
+    <a href="/" class="head-authorLink">
+      范永健的Blog</a>
+  </h1>
+  <div class="head-right">
+    <!-- <div class="head-search">
+      <input class="head-searchK"></input>
+      <span class="head-searchT">
+        </span>
+    </div> -->
+    <button class="barWrap" id="barWrap-toggle">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </button>
+    <div class="head-about" id="head-about">
+      
+      <a class="head-aboutLink" href="/about">
+        关于</a>
+      
+    </div>
+  </div>
+</header>
+    </div>
+    <div class="main">
+      <div class="barShow-head" id="barShow">
+  <ul class="barShow-ul">
+    
+      <li class="barShow-item">
+        <a href="/archives"><span>
+            Archives</span></a>
+      </li>
+    
+      <li class="barShow-item">
+        <a href="/categories/posts1"><span>
+            Posts1</span></a>
+      </li>
+    
+      <li class="barShow-item">
+        <a href="/categories/your-link"><span>
+            Posts2</span></a>
+      </li>
+    
+      <li class="barShow-item">
+        <a href="/tags"><span>
+            Tags</span></a>
+      </li>
+    
+  </ul>
+</div>
+      <article class="post" id="post">
+  <header class="post-head">
+    <h1 class="post-title">
+      <a class="title" href="/2018/04/07/2018-04-07-CSS%20%E8%AE%A1%E6%95%B0%E5%99%A8%E7%9A%84%E5%A6%99%E7%94%A8/">
+        CSS 计数器简介
+      </a>
+    </h1>
+  </header>
+  <div class="post-datetag">
+    <div class="post-date">
+      <time class="post-time" title="2018-04-07 09:40:00" datetime="2018-04-07T01:40:00.000Z" itemprop="datePublished">
+  2018-04-07</time>
+    </div>
+    <div class="post-tag">
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CSS/" rel="tag">CSS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a></li></ul>
+
+    </div>
+  </div>
+
+  
+    <div class="post-cc">
+      版权声明：
+        
+          署名-非商业性使用-相同方式共享 | <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/2.5/cn/">CC BY-NC-SA 2.5 CN</a>
+        
+    </div>
+  
+
+  <div class="article-entry" itemprop="articleBody">
+    <p>CSS 计数器（counter）是由 CSS 维护的变量，其主要用途是，可以通过指定的规则来计算节点元素的使用次数。</p>
+<span id="more"></span>
+<p>计数器的使用很简单，分为以下三步：</p>
+<ol>
+<li>__初始化计数器__。</li>
+<li>__指定增量规则__。</li>
+<li>__应用计数器__。</li>
+</ol>
+<p>这三步分别对应这计数器的三个属性和方法：</p>
+<ol>
+<li><code>counter-reset</code></li>
+<li><code>counter-increment</code></li>
+<li><code>counter()/counters()</code></li>
+</ol>
+<p>下面使用一个例子，来熟悉这些规则。</p>
+<p>首先，我们拥有一个如下的列表。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span>第一项<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span>第二项<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span>第三项<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>接下来我们使用计数器来为这个列表前面加上序号，使它呈现为下面这个样子。</p>
+<p><img src="http://oq717k0qe.bkt.clouddn.com/18-4-7/52219779.jpg" alt="counter example"></p>
+<p>很简单，如前面所述，三步走：</p>
+<p>第一步，初始化计数器。我们使用 <code>counter-reset</code> 操作，这个属性可以接受两个值为一组的多组属性值，第一个值，我们为计数器起个名字，第二个值，我们指定该计数器的初始值。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">counter-reset</span>: custom-name integer;</span><br></pre></td></tr></table></figure>
+
+<p>第一个计数器的名称必须由字母、数字、下划线、中划线组成，且第一个字符必须为字母。第二个为整数，可以为负值，默认值为0.一般情况下我们把它定义在它的父元素上。</p>
+<p>此属性可以指定多组，代表多个计数器，例如：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">counter-reset</span>: counter1 counter2 <span class="number">1</span> counter3 -<span class="number">2</span>;</span><br></pre></td></tr></table></figure>
+
+<p>上面的规则定义了三个计数器，第一个名称为 counter1 初始值为 0，第二个 counter2 初始值为1，第三个counter3 初始值为 -2。</p>
+<p>所以回到上面的例子，我们的列表要从1开始，所以，我们可以如下定义：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">ul</span> &#123;</span><br><span class="line">    <span class="attribute">counter-reset</span>: items <span class="number">0</span>; <span class="comment">/* 0 可以省略 */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>初始化之后，第二步，指定计数器增量规则。我们使用 <code>counter-increment</code> 来实现这个目的，这个属性的值和前面的 <code>counter-reset</code> 十分类似，同样是由两个值组成的多组值，第一个值同样是由 <code>counter-reset</code> 初始化好的计数器名称，第二个值为该计数器的增量，默认值为 1.</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">counter-increment</span>: counter-name integer;</span><br></pre></td></tr></table></figure>
+
+<p>举例，针对上面的三个计数器，我们分别为它们指定不同的增量规则：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">counter-increment</span>: counter1 counter2 -<span class="number">1</span> counter3 <span class="number">2</span></span><br></pre></td></tr></table></figure>
+
+<p>我们为 counter1 没有指定增量，所以它会按照默认值 1 递增，counter2 按 1 递减，counter3 按 2 递增。</p>
+<p>再次回到我们的例子，我们为已经初始化好的 items 计数器指定以 1 递增的增量规则：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">li &#123;</span><br><span class="line">    counter-increment: items 1; /* 1 同样可以省略 */</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>很简单吧，接下来就是第三步，应用我们指定好的计数器。一般来说，计数器常用于自动生成列表项的递增规则，所以经常在伪类元素的 <code>content</code> 属性中使用它，同样，我们需要一个 <code>counter()</code> 函数的帮助来将相应计数器注入 <code>content</code> 属性中，我们把计数器的名称传入到此函数可以完成应用。并且可以定制更个性化的计数规则。直接上例子：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">li</span>:before &#123;</span><br><span class="line">    content: <span class="built_in">counter</span>(items) <span class="string">&#x27;. &#x27;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>这样，我们就为三个列表项前面添加了‘1. 2. 3.’的计数规则。另外，<code>counter()</code> 方法可以指定第二个参数，来约束计数器的显示规则，例如指定为 <code>lower-roman</code>，则它会按照小写罗马数字的形式递增：ⅰⅱⅲⅳ···，至于这个值可以取什么值，其实就是 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/list-style-type">list-style-type</a>` 可以取的值它都可以。</p>
+<p>需要注意的是，除了初始化操作，其它两项操作必须要指定在相应的列表项上才能生效。</p>
+<h1 id="计数器嵌套"><a href="#计数器嵌套" class="headerlink" title="计数器嵌套"></a>计数器嵌套</h1><p>计数器特别强大的一点是，在一个嵌套的列表项，它会为内层的子元素自动添加计数器，我们可以在使用计数器的时候，应用 <code>counters()</code> 函数的第二个参数来指定子项的连接符。例如：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">content</span>: <span class="built_in">counters</span>(counter-name, <span class="string">&#x27;-&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>在以上规则中，列表的子项会呈现为‘1-1， 1-2， 1-3’这样的形式。上例子：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- html --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- css --&gt;</span></span><br><span class="line">ul &#123;</span><br><span class="line">  counter-reset: content;</span><br><span class="line">  list-style-type: none;</span><br><span class="line">&#125;</span><br><span class="line">ul li:before &#123;</span><br><span class="line">  counter-increment: content;</span><br><span class="line">  content: counters(content, &quot;-&quot;) &quot;. &quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>它呈现出来的效果如下图：</p>
+<p><img src="http://oq717k0qe.bkt.clouddn.com/18-4-7/61238160.jpg" alt="counter 嵌套"></p>
+<p>以上就是对 CSS 计数器的简单介绍。你可以看张鑫旭大神的<a target="_blank" rel="noopener" href="http://www.zhangxinxu.com/wordpress/2014/08/css-counters-automatic-number-content/">这篇</a>查看更详细生动的介绍。</p>
+
+  </div>
+</article>
+
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E8%AE%A1%E6%95%B0%E5%99%A8%E5%B5%8C%E5%A5%97"><span class="post-toc-number">1.</span> <span class="post-toc-text">计数器嵌套</span></a></li></ol>
+        </nav>
+    </aside>
+   
+    </div>
+    <footer class="footer-nav">
+      <div class="footer">
+        <span class="footer-msg">
+  
+  2020
+  
+  
+    <span class="timeDivide">-</span>
+    2021
+  
+  范永健.&nbsp;
+  Power by
+  <a href="https://hexo.io/" target="_blank" rel="external nofollow">Hexo</a>
+  and
+  <a class="orangelink" href="https://github.com/" target="_blank" rel="">
+    hexo-theme-yuzu</a>
+</span>
+
+      </div>
+    </footer>
+    <div class="back-top" id="back-top">
+      <i class="back-top-icon"></i>
+    </div>
+    
+
+  <script src="/js/jquery/jquery-3.1.1.min.js"></script>
+
+    
+<script src="/js/theme.js"></script>
+
+    
+<script src="/js/index.js"></script>
+
+
+  </div>
+</body>

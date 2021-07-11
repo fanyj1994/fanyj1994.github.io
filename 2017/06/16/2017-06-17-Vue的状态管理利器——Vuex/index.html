@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <title>范永健的Blog - 不经审视的人生不值一过</title>
+    
+      <link rel="icon" href="/img/favicon.ico">
+    
+    <meta name="keyword"  content="">
+    
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <div class="loading-wrapper">
+    <div class="loading">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+  <div class="page">
+    <div class="head">
+      <header class="head-header">
+  <h1 class="head-authorH">
+    <a href="/" class="head-authorLink">
+      范永健的Blog</a>
+  </h1>
+  <div class="head-right">
+    <!-- <div class="head-search">
+      <input class="head-searchK"></input>
+      <span class="head-searchT">
+        </span>
+    </div> -->
+    <button class="barWrap" id="barWrap-toggle">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </button>
+    <div class="head-about" id="head-about">
+      
+      <a class="head-aboutLink" href="/about">
+        关于</a>
+      
+    </div>
+  </div>
+</header>
+    </div>
+    <div class="main">
+      <div class="barShow-head" id="barShow">
+  <ul class="barShow-ul">
+    
+      <li class="barShow-item">
+        <a href="/archives"><span>
+            Archives</span></a>
+      </li>
+    
+      <li class="barShow-item">
+        <a href="/categories/posts1"><span>
+            Posts1</span></a>
+      </li>
+    
+      <li class="barShow-item">
+        <a href="/categories/your-link"><span>
+            Posts2</span></a>
+      </li>
+    
+      <li class="barShow-item">
+        <a href="/tags"><span>
+            Tags</span></a>
+      </li>
+    
+  </ul>
+</div>
+      <article class="post" id="post">
+  <header class="post-head">
+    <h1 class="post-title">
+      <a class="title" href="/2017/06/16/2017-06-17-Vue%E7%9A%84%E7%8A%B6%E6%80%81%E7%AE%A1%E7%90%86%E5%88%A9%E5%99%A8%E2%80%94%E2%80%94Vuex/">
+        Vue 的状态管理利器 —— Vuex 入门介绍
+      </a>
+    </h1>
+  </header>
+  <div class="post-datetag">
+    <div class="post-date">
+      <time class="post-time" title="2017-06-16 14:40:00" datetime="2017-06-16T06:40:00.000Z" itemprop="datePublished">
+  2017-06-16</time>
+    </div>
+    <div class="post-tag">
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Vue/" rel="tag">Vue</a></li></ul>
+
+    </div>
+  </div>
+
+  
+    <div class="post-cc">
+      版权声明：
+        
+          署名-非商业性使用-相同方式共享 | <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/2.5/cn/">CC BY-NC-SA 2.5 CN</a>
+        
+    </div>
+  
+
+  <div class="article-entry" itemprop="articleBody">
+    <p>一个较大的项目中，会涉及到很多数据，有的是纯前端的，也有来自后台的，随着 View 层交互行为的驱动，整个项目中的数据需要涉及到大量的数据变更，这种变更会十分复杂，以至于我们无法追踪状态的源头，这个时候，就需要采用一些方案，来管理这些数据状态，所谓的状态管理，管理的是从视图层事件源到数据变迁的映射过程。</p>
+<span id="more"></span>
+<p>Facebook 公司提出了最早的 Flux 状态管理技术，现在前端框架流行的状态管理，都遵照 Flux 的“单向数据流”理念，所谓单向数据流，基本上是这样运作的： <strong>Action</strong> → <strong>Dispatch</strong> → <strong>Store</strong> → <strong>View</strong>，也就是说，在一个项目中，我们会建立一个状态树，叫做 Store，把所有的 State（状态）全部放在这个 Store 树中，如果你要改变 View，就必须通过一些动作来操作 Store 中的 state. Vue 的状态管理方法 Vuex 就是依照 Flux 的“单向数据流”理念，在 Vuex 的官方文档中，还有一个更为简洁的单向数据流示意图，如下：</p>
+<p><img src="http://vuex.vuejs.org/zh-cn/images/flow.png" alt="Flow"></p>
+<p>模型中的 state， 就是驱动应用的原始数据源，以声明方式将这些 state 映射到 view 中，而要改变 state，则要通过一些 action 来驱动。</p>
+<p>但是，我们知道，Vue 采用的是组件式的开发，如果有一个状态，在多个组件间共享的时候，这个单向数据流就会被打破，经常会出现两个问题：</p>
+<ul>
+<li>多个视图依赖同一状态</li>
+<li>来自不同视图的行为变更同一个状态</li>
+</ul>
+<h3 id="Vuex-是如何做的"><a href="#Vuex-是如何做的" class="headerlink" title="Vuex 是如何做的"></a>Vuex 是如何做的</h3><p>这个时候，由于组件的嵌套和组合，数据传递将变得十分混乱，维护难度十分大。为了解决这个痛点，Vuex 采用了 <strong>集中式全局单例模式</strong>，将所有的状态和其管理全部集中在一个单例 Store 树中，所有的组件都可以通过 Store 树来访问状态。</p>
+<blockquote>
+<p>Vuex 是一个专为 Vue.js 应用程序开发的状态管理模式。它采用集中式存储管理应用的所有组件的状态，并以相应的规则保证状态以一种可预测的方式发生变化。 —— 来自 Vuex 官方文档的介绍</p>
+</blockquote>
+<p>如何下载，应用不再赘述，直接说明一下核心概念，首先放上官方文档的一张图：</p>
+<p><img src="http://vuex.vuejs.org/zh-cn/images/vuex.png"></p>
+<p>这张图很明确地表现出了 Vuex 的状态管理理念，首先需要明确的是，一个 state 想要改变，必须通过来提交(commit) 定义在 mutations 中的方法来进行，最简单的一次状态更新是这样的：发生在 component 上的一次事件中来 commit 一个相应的 mutation 方法，mutation 方法来 mutate 对应的 state，然后在组件中通过计算属性的监测，响应式更新视图。可以在<a target="_blank" rel="noopener" href="https://jsfiddle.net/fanyj/per91q9u/">这里</a>查看最简单的一个 Vuex 状态管理的示例。</p>
+<p>从例子中可以看出，要改变一个 state，必须要在 mutations 定义一个方法，这个方法可以接收两个参数，第一个是 state 属性，用来访问想要的状态，第二个是一个 payload（荷载），这个 payload 可以是一个值，也可以是一个对象，是传入用于处理对象的参数。</p>
+<p>定义好 mutation 方法之后，我们需要在需要的时候定义 commit 方法来提交定义好的 mutation 方法，并且按它的要求传入相应的 payload，commit 方法是属于我们的状态树全局单例的方法，我们可以通过 <code>store.commit()</code> 来调用，或者在全局注入 store 之后，在任何地方都可以吃通过 <code>this.$store.commit()</code> 来定义提交方法。我们这里将它定义在按钮的点击事件中：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">plus () &#123;</span><br><span class="line">  store.commit(<span class="string">&#x27;plus&#x27;</span>, &#123;<span class="attr">num</span>: <span class="number">10</span>&#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在上面的方法定义，我们可以把对应的 mutation 名字也并入到 payload 中，一次性传入：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">plus () &#123;</span><br><span class="line">  store.commit(&#123;<span class="attr">type</span>: <span class="string">&#x27;plus&#x27;</span>, <span class="attr">num</span>: <span class="number">10</span>&#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>最后，为了页面能够监测到 state 的值，我们可以通过计算属性来访问状态：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">computed: &#123;</span><br><span class="line">  count () &#123;</span><br><span class="line">    <span class="keyword">return</span> store.state.count</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这样，一次单向数据流的状态管理过程就实现了。</p>
+<h3 id="action-参与的异步状态管理"><a href="#action-参与的异步状态管理" class="headerlink" title="action 参与的异步状态管理"></a>action 参与的异步状态管理</h3><p> 在 Vuex 中，为了保证每次状态变更都是可以追踪的，可预测的，规定在 mutations 中只能进行同步的状态变更，但是，在实际的需求中，我们经常需要通过异步请求来变更状态，这时候，Vuex 引入一个 actions 选项，用来专门处理异步请求。在 actions 中，我们可以异步提交 mutation，action 方法可以接受一个 context 作为参数，context 等同于当前模块的 store 对象。像下面这样：</p>
+ <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">actions: &#123;</span><br><span class="line">  asyncPlus (context) &#123;</span><br><span class="line">    <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">      context.commit(<span class="string">&#x27;plus&#x27;</span>, &#123;<span class="attr">num</span>: <span class="number">10</span>&#125;)</span><br><span class="line">    &#125;, <span class="number">2000</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这相当于完全为了进行异步处理状态，我们多走两步路，为了激活这次提交，我们可以在需要的时候使用 store 实例的 dispatch 方法来分发相应的 actions, dispatch 方法接受想要分发的 action 作为参数：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 在点击事件中分发</span></span><br><span class="line">plus () &#123;</span><br><span class="line">  store.dispatch(<span class="string">&#x27;asyncPlus&#x27;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>至此，我们了解了同步和异步两种方式来进行状态管理，其相同点在于，所有的状态变更必须要通过 mutation 来进行，而 actions 只不过是为了能够进行异步提交 mutation 而设立的。</p>
+<p>有的时候，我们需要在既有状态的基础上，派生出一些新的状态，为了这样的需求，Vuex 为我们提供了一个 Getters 选项。关于这个，可以查看官方文档的<a target="_blank" rel="noopener" href="http://vuex.vuejs.org/zh-cn/getters.html">介绍</a>，十分简洁。</p>
+<p>以上就是 Vuex 的一些核心概念，以及用它进行状态管理的基本步骤。至于在实际的项目中如何使用 Vuex，只有在项目用到了才会知道~So，跑起来吧。</p>
+
+  </div>
+</article>
+
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Vuex-%E6%98%AF%E5%A6%82%E4%BD%95%E5%81%9A%E7%9A%84"><span class="post-toc-number">1.</span> <span class="post-toc-text">Vuex 是如何做的</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#action-%E5%8F%82%E4%B8%8E%E7%9A%84%E5%BC%82%E6%AD%A5%E7%8A%B6%E6%80%81%E7%AE%A1%E7%90%86"><span class="post-toc-number">2.</span> <span class="post-toc-text">action 参与的异步状态管理</span></a></li></ol>
+        </nav>
+    </aside>
+   
+    </div>
+    <footer class="footer-nav">
+      <div class="footer">
+        <span class="footer-msg">
+  
+  2020
+  
+  
+    <span class="timeDivide">-</span>
+    2021
+  
+  范永健.&nbsp;
+  Power by
+  <a href="https://hexo.io/" target="_blank" rel="external nofollow">Hexo</a>
+  and
+  <a class="orangelink" href="https://github.com/" target="_blank" rel="">
+    hexo-theme-yuzu</a>
+</span>
+
+      </div>
+    </footer>
+    <div class="back-top" id="back-top">
+      <i class="back-top-icon"></i>
+    </div>
+    
+
+  <script src="/js/jquery/jquery-3.1.1.min.js"></script>
+
+    
+<script src="/js/theme.js"></script>
+
+    
+<script src="/js/index.js"></script>
+
+
+  </div>
+</body>

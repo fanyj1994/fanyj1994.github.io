@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <title>范永健的Blog - 不经审视的人生不值一过</title>
+    
+      <link rel="icon" href="/img/favicon.ico">
+    
+    <meta name="keyword"  content="">
+    
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <div class="loading-wrapper">
+    <div class="loading">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+  <div class="page">
+    <div class="head">
+      <header class="head-header">
+  <h1 class="head-authorH">
+    <a href="/" class="head-authorLink">
+      范永健的Blog</a>
+  </h1>
+  <div class="head-right">
+    <!-- <div class="head-search">
+      <input class="head-searchK"></input>
+      <span class="head-searchT">
+        </span>
+    </div> -->
+    <button class="barWrap" id="barWrap-toggle">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </button>
+    <div class="head-about" id="head-about">
+      
+      <a class="head-aboutLink" href="/about">
+        关于</a>
+      
+    </div>
+  </div>
+</header>
+    </div>
+    <div class="main">
+      <div class="barShow-head" id="barShow">
+  <ul class="barShow-ul">
+    
+      <li class="barShow-item">
+        <a href="/archives"><span>
+            Archives</span></a>
+      </li>
+    
+      <li class="barShow-item">
+        <a href="/categories/posts1"><span>
+            Posts1</span></a>
+      </li>
+    
+      <li class="barShow-item">
+        <a href="/categories/your-link"><span>
+            Posts2</span></a>
+      </li>
+    
+      <li class="barShow-item">
+        <a href="/tags"><span>
+            Tags</span></a>
+      </li>
+    
+  </ul>
+</div>
+      <article class="post" id="post">
+  <header class="post-head">
+    <h1 class="post-title">
+      <a class="title" href="/2015/04/16/2015-04-16-%E6%B8%85%E9%99%A4%E6%B5%AE%E5%8A%A8%E7%9A%84%E4%B8%89%E7%A7%8D%E6%96%B9%E6%B3%95/">
+        清除浮动的三种方法
+      </a>
+    </h1>
+  </header>
+  <div class="post-datetag">
+    <div class="post-date">
+      <time class="post-time" title="2015-04-16 09:40:00" datetime="2015-04-16T01:40:00.000Z" itemprop="datePublished">
+  2015-04-16</time>
+    </div>
+    <div class="post-tag">
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a></li></ul>
+
+    </div>
+  </div>
+
+  
+    <div class="post-cc">
+      版权声明：
+        
+          署名-非商业性使用-相同方式共享 | <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/2.5/cn/">CC BY-NC-SA 2.5 CN</a>
+        
+    </div>
+  
+
+  <div class="article-entry" itemprop="articleBody">
+    <p><span>千里之行始于足下</span></p>
+<span id="more"></span>
+<p>今天看到一个题目说如何居中一个float:left的元素的题目，我蛮以为用margin:0 auto 就可以解决了。然而，试验之后，发现事实并非如此，才发现自己对于这方面的知识竟是相当忙乱！于是撇下手头事务，翻书查资料温习了这部分‘简单’的内容。并总结如下。</p>
+<h3 id="清理浮动的三种方法"><a href="#清理浮动的三种方法" class="headerlink" title="清理浮动的三种方法"></a>清理浮动的三种方法</h3><p>当给元素设置了float属性之后，我们知道，元素便会脱离文档流的束缚，像一片水中浮动的树叶随波逐流。但是，在浮动的情况下，可能会导致网页内容出现一些我们并不想让其发生的干扰，例如其父元素的包裹作用将失去作用，假如你给父元素设置了漂亮的背景它却不见了，岂不惹人烦恼！于是，清理浮动属性带来的干扰就十分重要了。我们常常有三种方法。</p>
+<p>方法一：使用伪类元素（例如&lt;br/&gt;），并给此标签设置<code>clear:both;</code> 样式。但是其缺点是会增加多于的无用的不必要标记。今天在Stack Overflow上看到一个更简单的设置方式，我们可以增加以下样式：</p>
+<pre><code>.clearfix:after &#123;
+  content:&quot;&quot;;
+  display:table;
+  clear:both;
+&#125;
+</code></pre>
+<p>只是这种方法不支持IE6、7.注意，clearfix是插入到要清理浮动塌陷的父元素包裹层的类名。对于IE7以下的浏览器，我们可以这样解决：</p>
+<pre><code>.clearfix&#123;*zoom:1;&#125;
+</code></pre>
+<p>方法二：给其父元素设置浮动属性，这样会使其父元素也拥有了这项技能，也就不会影响了~但是这种做法可能会导致其它不需要浮动子元素也受到其浮动的影响。</p>
+<p>方法三：给其父元素设置 overflow:hidden; 样式，也能达到我们需要的效果。其原理很简单，因为overflow属性定义在包含的内容对于指定的尺寸太大的情况下元素应该如何反应，当其hidden的时候父元素的边框就会紧贴着子元素。So,达到了我们需要的效果。但是其会在某些情况下产生滚动条或者截断内容，当然这种情况我们大可以谨慎操作避免的。</p>
+<p>所以综上，我们优先考虑第一种方法，酌情使用~</p>
+<h3 id="如何居中一个设置了浮动的元素"><a href="#如何居中一个设置了浮动的元素" class="headerlink" title="如何居中一个设置了浮动的元素"></a>如何居中一个设置了浮动的元素</h3><p>对于一个没有浮动的元素，我们通常可以通过对其设置 <code>margin:0 auto; </code>来实现元素的居中，但是这个方法对于浮动元素却失去了作用，其实我们可以理解的是，在脱离文档流后，浮动的力量其实就是auto的力量，所以他它会自动向左浮动。</p>
+<p>那么，此情此景，应该怎么样来实现居中的效果呢？仔细考虑，会有这样一个方法。</p>
+<p>首先给此元素设置一个宽度值，先设置它的 <code>margin-left:50%</code> ，这个时候元素的左边缘正好位于其父元素的中央，然后设置其<code>position:relative;</code>left:负本元素宽度的一半，这样的目的是将本元素向左移动其宽度的一半，这个时候可保证本元素的中间点位于父元素的中央。实例代码如下：</p>
+<pre><code>#div1&#123;
+    width:30%;
+    height: 200px;
+    float: left;
+    background-color: blue;
+    margin-left:50%; 
+    position:relative; left:-15%;
+&#125;
+</code></pre>
+<p>就这。再接再厉~</p>
+
+  </div>
+</article>
+
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E6%B8%85%E7%90%86%E6%B5%AE%E5%8A%A8%E7%9A%84%E4%B8%89%E7%A7%8D%E6%96%B9%E6%B3%95"><span class="post-toc-number">1.</span> <span class="post-toc-text">清理浮动的三种方法</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E5%A6%82%E4%BD%95%E5%B1%85%E4%B8%AD%E4%B8%80%E4%B8%AA%E8%AE%BE%E7%BD%AE%E4%BA%86%E6%B5%AE%E5%8A%A8%E7%9A%84%E5%85%83%E7%B4%A0"><span class="post-toc-number">2.</span> <span class="post-toc-text">如何居中一个设置了浮动的元素</span></a></li></ol>
+        </nav>
+    </aside>
+   
+    </div>
+    <footer class="footer-nav">
+      <div class="footer">
+        <span class="footer-msg">
+  
+  2020
+  
+  
+    <span class="timeDivide">-</span>
+    2021
+  
+  范永健.&nbsp;
+  Power by
+  <a href="https://hexo.io/" target="_blank" rel="external nofollow">Hexo</a>
+  and
+  <a class="orangelink" href="https://github.com/" target="_blank" rel="">
+    hexo-theme-yuzu</a>
+</span>
+
+      </div>
+    </footer>
+    <div class="back-top" id="back-top">
+      <i class="back-top-icon"></i>
+    </div>
+    
+
+  <script src="/js/jquery/jquery-3.1.1.min.js"></script>
+
+    
+<script src="/js/theme.js"></script>
+
+    
+<script src="/js/index.js"></script>
+
+
+  </div>
+</body>

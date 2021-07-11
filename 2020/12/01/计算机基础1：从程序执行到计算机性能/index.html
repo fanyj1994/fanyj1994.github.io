@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <title>范永健的Blog - 不经审视的人生不值一过</title>
+    
+      <link rel="icon" href="/img/favicon.ico">
+    
+    <meta name="keyword"  content="">
+    
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <div class="loading-wrapper">
+    <div class="loading">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+  <div class="page">
+    <div class="head">
+      <header class="head-header">
+  <h1 class="head-authorH">
+    <a href="/" class="head-authorLink">
+      范永健的Blog</a>
+  </h1>
+  <div class="head-right">
+    <!-- <div class="head-search">
+      <input class="head-searchK"></input>
+      <span class="head-searchT">
+        </span>
+    </div> -->
+    <button class="barWrap" id="barWrap-toggle">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </button>
+    <div class="head-about" id="head-about">
+      
+      <a class="head-aboutLink" href="/about">
+        关于</a>
+      
+    </div>
+  </div>
+</header>
+    </div>
+    <div class="main">
+      <div class="barShow-head" id="barShow">
+  <ul class="barShow-ul">
+    
+      <li class="barShow-item">
+        <a href="/archives"><span>
+            Archives</span></a>
+      </li>
+    
+      <li class="barShow-item">
+        <a href="/categories/posts1"><span>
+            Posts1</span></a>
+      </li>
+    
+      <li class="barShow-item">
+        <a href="/categories/your-link"><span>
+            Posts2</span></a>
+      </li>
+    
+      <li class="barShow-item">
+        <a href="/tags"><span>
+            Tags</span></a>
+      </li>
+    
+  </ul>
+</div>
+      <article class="post" id="post">
+  <header class="post-head">
+    <h1 class="post-title">
+      <a class="title" href="/2020/12/01/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%801%EF%BC%9A%E4%BB%8E%E7%A8%8B%E5%BA%8F%E6%89%A7%E8%A1%8C%E5%88%B0%E8%AE%A1%E7%AE%97%E6%9C%BA%E6%80%A7%E8%83%BD/">
+        计算机基础1：从程序执行到计算机性能
+      </a>
+    </h1>
+  </header>
+  <div class="post-datetag">
+    <div class="post-date">
+      <time class="post-time" title="2020-12-01 00:00:00" datetime="2020-11-30T16:00:00.000Z" itemprop="datePublished">
+  2020-12-01</time>
+    </div>
+    <div class="post-tag">
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/" rel="tag">计算机基础</a></li></ul>
+
+    </div>
+  </div>
+
+  
+    <div class="post-cc">
+      版权声明：
+        
+          署名-非商业性使用-相同方式共享 | <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/2.5/cn/">CC BY-NC-SA 2.5 CN</a>
+        
+    </div>
+  
+
+  <div class="article-entry" itemprop="articleBody">
+    <blockquote>
+<p>本系列计划从计算机组成出发，探索现代计算机存储体系，以及各种使用场景中，计算机如何使用存储技术来提升计算能力。</p>
+<ol>
+<li>从计算机组成到程序性能</li>
+<li>几种典型的计算机存储介质</li>
+<li>编码——背后的劳作者</li>
+<li>云时代的存储技术</li>
+</ol>
+</blockquote>
+<p>计算机的核心功能是数据计算。</p>
+<p>若想要完成复杂的计算，例如游戏场景、文字处理等，就必须要有数据的存储。以最早的计算工具算盘为例，排列成串的算珠即是它的存储介质。现代计算机都是基于冯诺依曼结构，这套模型的背后，指出了将存储设备与中央处理器分开的架构，也就是说，存储与计算的指令系统是分开的。</p>
+<p>程序员们依托于计算机构建庞大的软件世界，当透过代码的表象，一个程序是如何跑起来的？</p>
+<h3 id="一个程序的执行之路"><a href="#一个程序的执行之路" class="headerlink" title="一个程序的执行之路"></a>一个程序的执行之路</h3><p>程序员小张是一个前端工程师，他写了一段优雅的 JS 代码：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> a = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">const</span> b = <span class="number">2</span>;</span><br><span class="line"><span class="built_in">console</span>.log(a + b);</span><br></pre></td></tr></table></figure>
+
+<p>放到浏览器中执行，成功地获得了他期待的效果。他很好奇，这背后到底发生了什么事。</p>
+<p>经过一番探究，他大概理解了这个过程：程序最开始存储在磁盘上。JS 作为一门高级编程语言，这串代码人类可读，我们自然可以说它们是优雅的，但计算机不吃这一套，高级语言编写的代码无法直接被计算机执行，首先得经过一系列的编译过程，将其转换为机器语言，也就是二进制位串。或者，用高级话讲，可以称作比特流。所以小张特意去温习了编译原理的东西，原来，一段程序由高级语言到二进制流，主要经过了以下的几个步骤：<strong>词法分析、语法分析、语义检查、代码优化和生成字节码。</strong></p>
+<ol>
+<li>词法分析(Tokenizing/Lexing)：也就是分词，将代码切分为最小的语义单元，在小张这串程序中，<code>const</code>,<code>a</code>,<code>=</code>,<code>1</code>，都是一个个词法单元(token)。</li>
+<li>语法分析(Parsing)：这个过程是将词法单元按照程序逻辑逐层嵌套的程序结构树，这个树被称为<strong>抽象语法树</strong>(Abstract Syntax Tree, AST)。</li>
+<li>语义检查：当生成抽象语法树之后，可能会出现一些类型不匹配造成的编译错误，这个时候，就需要进一步进行语义检查，语义检查的重要任务之一就是类型检查，例如函数的形参与实参类型是否匹配。当然 JS 作为弱类型语言，就无所畏惧啦。</li>
+<li>代码优化和生成字节码：这个阶段负责将 AST 转化为可执行的机器语言。JS 作为宇宙级语言，它在不同的环境中会有不同的生成过程。例如最常见的 v8 引擎，v8 引擎有专门的优化编译器将 AST 优化编译为机器语言。</li>
+</ol>
+<p>终于，小张优雅的代码在经过一系列的骚操作后，变成了他不认识的样子（机器码），事实上，计算机中的万事万物，都是由一串比特表示的，在计算机电路的最底层，是由大量的逻辑门构成，二进制的 0 和 1 分别对应逻辑门的两种状态。更细致地来说，我们的代码最终都被描述为一系列机器语言指令。</p>
+<p>对于计算机来说，这才是它熟悉的味道，因为，它终于可以开始执行了！</p>
+<p>此时，我们的源代码已经被编译成可执行的二进制文本文件，并被存放在磁盘上。向计算机发出执行的命令之后，计算及内部一些我们耳熟能详的打工人们行动起来。</p>
+<p>编译好的源程序码会被陆续地经过系统<strong>总线</strong>（代码的高铁系统）运输到<strong>主存</strong>。主存是程序的临时存储空间，可以理解为一个线性的字节数组，每个进入这里的数组都会为其分配一个唯一的地址。</p>
+<p>接下来，<strong>处理器（CPU）</strong>登场了。CPU 的核心是大小为一个字的存储设备（<strong>寄存器</strong>）组成的，寄存器永远指向主存中的一条机器语言指令。处理器根据指令级架构模型（我们常讲的 ARM 和 x86 架构）来有序地执行指令。每执行完一条指令，就会更新寄存器，使其指向下一条指令。当然，CPU 中还有其他的部件，来辅助计算，例如 ALU（算术逻辑单元）来计算新的数据和地址值。如此反复运行这个周期，一段程序会被完整地执行。如果要实现更复杂的人机互动，就需要计算机的其他部件的参与，例如 I/O 设备、图形设备器、网卡适配器等等，这些适配器都是一些外部设备与计算机总线相连的接口。</p>
+<h4 id="一个与人体的类比"><a href="#一个与人体的类比" class="headerlink" title="一个与人体的类比"></a>一个与人体的类比</h4><p>现在我们大概理解为什么寄存器所在的位置被叫做中央处理器，因为，计算机的计算核心就在这里。从一定意义上讲，计算机的构成和世间的万事万物都有相似之处，整体采用一种分层理念。以人体做类比：</p>
+<p>CPU 就像人的大脑，人身体的养料通过血管运输到大脑，计算机程序的执行指令通过总线到达 CPU。</p>
+<p>人体通过感官系统与外界交互，计算机通过各类输入输出设备与外界互联。</p>
+<p>人体通过脂肪来存储养料，计算机则需要存储设备来存放数据。</p>
+<p>而他们的各个部分又是如此地不可分割，相互协作之下，才能保证整个系统的平稳运行。</p>
+<p>下面这张图描述了一个典型的计算机硬件系统组成：</p>
+<p><img src="https://img-1257011122.cos.ap-beijing.myqcloud.com/images/v2-7df6d05820e7a783f96eed994c86b450_1440w.png" alt="一个典型计算机系统的硬件组成"></p>
+<h3 id="计算机的性能卡点在哪里"><a href="#计算机的性能卡点在哪里" class="headerlink" title="计算机的性能卡点在哪里"></a>计算机的性能卡点在哪里</h3><p>在以上的篇幅，我们粗略地介绍了一段程序是如何被计算机执行的。但对于程序员来讲，写出一个可执行的程序只是最低要求，我们希望程序能够更高效地执行。接下来，我将从程序员的角度来剖析计算机是如何设计来加速计算过程的，以及，目前计算机的性能瓶颈在哪里。</p>
+<h4 id="计算机的性能瓶颈"><a href="#计算机的性能瓶颈" class="headerlink" title="计算机的性能瓶颈"></a>计算机的性能瓶颈</h4><p>CPU 是否够快，一般被视为衡量计算机的运行效率的重要标准之一。但实际上，随着半导体技术的进步，CPU 的处理效率越来越快，已经不再是限制计算机性能的瓶颈。</p>
+<p>与 CPU 的处理效率高速发展的相比，主存的处理速度却提升缓慢，也就是说，<strong>主存限制了 CPU 的运算能力</strong>。就好比，天龙八部中的王语嫣，作为一个行走的武功百科全书，对于各类武功了如指掌，但内功过差，没法上阵对敌。所以，影响程序执行性能的瓶颈越来越明显。</p>
+<p>越大的存储器，其执行效率越慢。例如，一个寄存器文件一般只有几百字节，主存可能有数 G，而外部存储或者硬盘可能达到数百 G，甚至更大。可以在<a target="_blank" rel="noopener" href="https://colin-scott.github.io/personal_website/research/interactive_latency.html">这里</a>看到计算机世界中一些执行速度对比：</p>
+<p><img src="https://img-1257011122.cos.ap-beijing.myqcloud.com/images/image-20201202090611071.png" alt="image-20201202090611071"></p>
+<p>这也是著名的冯诺依曼瓶颈所指出的：<strong>为了执行指令，需要花费大量时间从存储器中取出来。</strong>开始的时候，源代码被放到磁盘上，程序加载时，需要将之复制到主存。程序运行时，又需要按一条一条指令复制到处理器。这部分“在路上”的时间占去了程序的大部分运行时间。</p>
+<p>为了缓解这一状况，高速缓存(cache memory)被设计出来。缓存区域用来存放处理器近期可能会被用到的信息。</p>
+<h4 id="多层缓存——计算机系统的努力"><a href="#多层缓存——计算机系统的努力" class="headerlink" title="多层缓存——计算机系统的努力"></a>多层缓存——计算机系统的努力</h4><p>现代计算机的存储器结构的主要思想是添加<strong>高速缓存层（cache）</strong>，以提高计算机的计算速度。具体做法是，在执行效率很快的处理器和较慢的主存之间插入一个更小更快的存储设备，这部分就是缓存区。这种设计的理念是，下一层作为上一层的高速缓存，L1 是寄存器文件的高速缓存，L2 是 L1 的高速缓存，L3 是 L2 的高速缓存，以此类推。当前层会优先从下一层去获取是否有需要的信息，极大避免了消耗在路上的时间。例如，处理器每次执行一条指令，可能只有几个字节，如果每次都需要到硬盘上读取，则耗时太多！</p>
+<p>所以说，现在计算机的存储结构呈现为一个层级结构，从上至下，设备的访问速度越来越慢，容量越来越大，造价越来越便宜。简单来说，现代计算机在处理器和主存之间有三层（L1-L3）高速缓存结构，它们使用造价昂贵的 SRAM 存储。同样地，由上往下，每层的存储空间越大，读取速率越慢。他们从上图可以看到，L1 缓存层与主存的引用速率相差 100 倍。</p>
+<p><img src="https://img-1257011122.cos.ap-beijing.myqcloud.com/images/1322310-20200328084130182-1706395900.png" alt="img"></p>
+<p>事实上，这种缓存的理念的计算机的世界中随处可见。例如，浏览器和 HTTP 的多重缓存机制，Redis，CDN 等，都可以找到缓存的影子。</p>
+<h3 id="程序的局部性"><a href="#程序的局部性" class="headerlink" title="程序的局部性"></a>程序的局部性</h3><p>程序运行的效率或者性能，是程序员们最关注的主题之一。对于程序员来说，<strong>程序执行的最大开销就是数据的复制过程</strong>。</p>
+<p>程序是指令和数据的结合。数据是计算的原材料，指令是计算的操作命令。程序员为数据起了名字，也就是变量。计算机中所有的数据最底层的表现形式都是二进制串，这些数据在计算机各个模块之间流动起来，执行任务。</p>
+<p>如何衡量一个程序的好坏？</p>
+<p>一方面，其需要尽可能正确地工作（bug 在所难免）；另一方面，其要尽可能快地运行。在今天这个世界，写程序已经不是一些 geek 的玩具，而是承载着无数商业应用的软件工程，所以，对于程序的评价，在追求运行速度的同时，必须要注意可维护性，或者说，代码的可读。也就是说，对于程序员来说，必须要在程序的运行速度和可维护性之间做好权衡。</p>
+<p>计算机程序倾向于引用邻近于其他最近被引用过的数据项的数据项，或者最近引用过的数据项本身。这就是计算机的<strong>局部性原理</strong>。</p>
+<p>局部性原理经常被解释为两种类型，时间局部性：一个被引用过的一次的内存位置很可能在不远的将来多次被引用。空间局部性：如果一个内存位置被引用过一次，可能在不远的将来引用附近的一个位置。</p>
+<p>局部性良好的程序运行得更快。多层存储层级结构之所以有效，正是局部性原理的一个表现。符合局部性的数据被缓存起来，再次被读取操作时，将获得更高的效率。高速缓存中放置从主存中取出来的缓存数据，主存中存放着磁盘中最近被引用的数据块，各种缓存技术都是局部性的应用，例如浏览器的本地缓存，会被优先应用等。</p>
+<h3 id="编写性能友好的程序"><a href="#编写性能友好的程序" class="headerlink" title="编写性能友好的程序"></a>编写性能友好的程序</h3><p>如果计算机硬件组成对于局部性原理的使用，程序员在编写软件的时候，要善于编写高速缓存友好的代码。宏观上来说，善用之前所讲的浏览器缓存、Redis 缓存等技术。微观上来说，在编写代码时，需要注意局部性友好。在《深入理解计算机系统》一书中提到了以下两个技巧：</p>
+<blockquote>
+<ol>
+<li>将你的注意力集中在内循环上，大部分计算和内存访问都发生在这里</li>
+<li>通过按照数据对象存储在内存中的顺序，以步长为 1 来读数据，从而使得你的空间局部性最大。</li>
+<li>一旦从存储器中读入了一个数据对象，就尽可能多地使用它，从而使得程序中的时间局部性最大。</li>
+</ol>
+</blockquote>
+<p>第 2 点中提到的步长为 1，可以理解为按顺序、连续地对某一个变量的引用。</p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/84742159">计算机的存储系统</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.jiqizhixin.com/articles/2018-12-18-11">性能之殇：从冯·诺依曼瓶颈谈起</a></p>
+<p><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E8%AE%BF%E9%97%AE%E5%B1%80%E9%83%A8%E6%80%A7">访问局部性</a></p>
+<p><a target="_blank" rel="noopener" href="https://book.douban.com/subject/26912767/">【书】深入理解计算机系统</a></p>
+
+  </div>
+</article>
+
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E4%B8%80%E4%B8%AA%E7%A8%8B%E5%BA%8F%E7%9A%84%E6%89%A7%E8%A1%8C%E4%B9%8B%E8%B7%AF"><span class="post-toc-number">1.</span> <span class="post-toc-text">一个程序的执行之路</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#%E4%B8%80%E4%B8%AA%E4%B8%8E%E4%BA%BA%E4%BD%93%E7%9A%84%E7%B1%BB%E6%AF%94"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">一个与人体的类比</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%9A%84%E6%80%A7%E8%83%BD%E5%8D%A1%E7%82%B9%E5%9C%A8%E5%93%AA%E9%87%8C"><span class="post-toc-number">2.</span> <span class="post-toc-text">计算机的性能卡点在哪里</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%9A%84%E6%80%A7%E8%83%BD%E7%93%B6%E9%A2%88"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">计算机的性能瓶颈</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#%E5%A4%9A%E5%B1%82%E7%BC%93%E5%AD%98%E2%80%94%E2%80%94%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%8A%AA%E5%8A%9B"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">多层缓存——计算机系统的努力</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E7%A8%8B%E5%BA%8F%E7%9A%84%E5%B1%80%E9%83%A8%E6%80%A7"><span class="post-toc-number">3.</span> <span class="post-toc-text">程序的局部性</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E7%BC%96%E5%86%99%E6%80%A7%E8%83%BD%E5%8F%8B%E5%A5%BD%E7%9A%84%E7%A8%8B%E5%BA%8F"><span class="post-toc-number">4.</span> <span class="post-toc-text">编写性能友好的程序</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E5%8F%82%E8%80%83"><span class="post-toc-number">5.</span> <span class="post-toc-text">参考</span></a></li></ol>
+        </nav>
+    </aside>
+   
+    </div>
+    <footer class="footer-nav">
+      <div class="footer">
+        <span class="footer-msg">
+  
+  2020
+  
+  
+    <span class="timeDivide">-</span>
+    2021
+  
+  范永健.&nbsp;
+  Power by
+  <a href="https://hexo.io/" target="_blank" rel="external nofollow">Hexo</a>
+  and
+  <a class="orangelink" href="https://github.com/" target="_blank" rel="">
+    hexo-theme-yuzu</a>
+</span>
+
+      </div>
+    </footer>
+    <div class="back-top" id="back-top">
+      <i class="back-top-icon"></i>
+    </div>
+    
+
+  <script src="/js/jquery/jquery-3.1.1.min.js"></script>
+
+    
+<script src="/js/theme.js"></script>
+
+    
+<script src="/js/index.js"></script>
+
+
+  </div>
+</body>

@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <title>范永健的Blog - 不经审视的人生不值一过</title>
+    
+      <link rel="icon" href="/img/favicon.ico">
+    
+    <meta name="keyword"  content="">
+    
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <div class="loading-wrapper">
+    <div class="loading">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+  <div class="page">
+    <div class="head">
+      <header class="head-header">
+  <h1 class="head-authorH">
+    <a href="/" class="head-authorLink">
+      范永健的Blog</a>
+  </h1>
+  <div class="head-right">
+    <!-- <div class="head-search">
+      <input class="head-searchK"></input>
+      <span class="head-searchT">
+        </span>
+    </div> -->
+    <button class="barWrap" id="barWrap-toggle">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </button>
+    <div class="head-about" id="head-about">
+      
+      <a class="head-aboutLink" href="/about">
+        关于</a>
+      
+    </div>
+  </div>
+</header>
+    </div>
+    <div class="main">
+      <div class="barShow-head" id="barShow">
+  <ul class="barShow-ul">
+    
+      <li class="barShow-item">
+        <a href="/archives"><span>
+            Archives</span></a>
+      </li>
+    
+      <li class="barShow-item">
+        <a href="/categories/posts1"><span>
+            Posts1</span></a>
+      </li>
+    
+      <li class="barShow-item">
+        <a href="/categories/your-link"><span>
+            Posts2</span></a>
+      </li>
+    
+      <li class="barShow-item">
+        <a href="/tags"><span>
+            Tags</span></a>
+      </li>
+    
+  </ul>
+</div>
+      <article class="post" id="post">
+  <header class="post-head">
+    <h1 class="post-title">
+      <a class="title" href="/2018/08/29/2018-08-29-cordova+vue%20%E5%BC%80%E5%8F%91%20APP%20%E4%B8%8A%E6%89%8B%E6%8C%87%E5%8D%97/">
+        cordova + Vue 开发 APP 上手指南
+      </a>
+    </h1>
+  </header>
+  <div class="post-datetag">
+    <div class="post-date">
+      <time class="post-time" title="2018-08-29 11:40:00" datetime="2018-08-29T03:40:00.000Z" itemprop="datePublished">
+  2018-08-29</time>
+    </div>
+    <div class="post-tag">
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Vue/" rel="tag">Vue</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a></li></ul>
+
+    </div>
+  </div>
+
+  
+    <div class="post-cc">
+      版权声明：
+        
+          署名-非商业性使用-相同方式共享 | <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/2.5/cn/">CC BY-NC-SA 2.5 CN</a>
+        
+    </div>
+  
+
+  <div class="article-entry" itemprop="articleBody">
+    <h3 id="什么是-cordova"><a href="#什么是-cordova" class="headerlink" title="什么是 cordova"></a>什么是 cordova</h3><p>cordova 是由 Apache 基金会支持的，使用 HTML5 + CSS3 + JS 来构建多平台 APP 程序的开发框架。其支持调用手机系统（Android、IOS、Windows phone）原生 API，它可以将你写的 Web 程序包裹进原生的 APP 壳中，也就是我们常说的 Hybrid APP （混合应用）。本文是一个前端开发者如何从 0 开始结合 Vue 来构建一个简单的 APP. </p>
+<span id="more"></span>
+<p>第一步，安装 cordova</p>
+<h3 id="安装-cordova"><a href="#安装-cordova" class="headerlink" title="安装 cordova"></a>安装 cordova</h3><p>cordova 提供一个可以全局安装的脚手架工具，我们使用 npm 来安装，你的电脑还没有 npm 的话，需要先安装 <a target="_blank" rel="noopener" href="https://nodejs.org/en/download/">node</a>，node 本身自带 npm 包管理器，安装好 node 之后，我们打开命令行程序，输入以下命令，全局安装 cordova：</p>
+<p><code>npm install -g cordova</code></p>
+<p>下载完之后，输入 <code>cordova -v</code> 查看是否成功安装，出现相应的版本号则成功安装。</p>
+<h3 id="创建-cordova-程序"><a href="#创建-cordova-程序" class="headerlink" title="创建 cordova 程序"></a>创建 cordova 程序</h3><p>安装好之后，我们来新建一个 cordova 应用，在命令行输入以下命令新建：</p>
+<p><code>cordova create learn-cordova</code></p>
+<p>其会在当前目录下生成以下项目结构：</p>
+<p><img src="http://oq717k0qe.bkt.clouddn.com/18-8-29/41726710.jpg"></p>
+<p>其中，我们重点关注 www 和 platforms 目录，我们写的 HTML/CSS/JS 代码就放在这个目录下面，现在这个目录下面已经有 cordova 为我们提供的示例项目代码。</p>
+<p>platforms 是用来存放我们为相应的系统平台打包的运行源码，它现在是空的，我们依次执行以下命令来添加相应的平台：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cordova platform add android --save</span><br><span class="line"></span><br><span class="line">cordova platform add ios --save</span><br><span class="line"></span><br><span class="line">cordova platform add browser --save</span><br></pre></td></tr></table></figure>
+
+<p>添加完成之后，我们可以在 platforms 文件夹下面看到 android 和 ios 文件夹。我们可以使用下面这行命令来查看我们已经添加的平台和可以添加的全部平台：</p>
+<p><code>cordova platform</code></p>
+<p>添加完平台之后，我们可以使用 <code>cordova run &lt; platform &gt;</code> 来运行相应平台的代码，作为前端开发者，我们可以首先在浏览器里面跑起来我们的项目：<code>cordova run browser</code> （前提是你前面添加了 browser 平台），默认情况下，它会在 8000 端口打开项目：</p>
+<p><img src="http://oq717k0qe.bkt.clouddn.com/18-8-29/99295049.jpg"></p>
+<p>如果你想查看它在安卓平台下的效果，则需要安装配置 Android SDK 环境，包括 Java JDK 的安装和环境变量配置， Android SDK 的安装和环境变量配置。这个过程可以通过 Android studio 来更高效地安装配置，当然，如果你的项目不涉及调用原生 API 的话，则可以直接下载 <a target="_blank" rel="noopener" href="http://www.androiddevtools.cn/">SDK Manager</a> 管理工具来下载，进去依次点击 “Android SDK 工具”，在下拉菜单中选择 “SDK Tools”， 然后在表格中选择相应的平台所需的 SDK 包，建议直接下载 zip，下载完之后，在环境变量中配置（具体过程可以百度，很简单）。</p>
+<p>配置完成之后，在刚下载好的 SDK manager 中打开 SDK Manager.exe 文件，在打开的界面中下载相应 API 级别的 SDK （推荐安装 Android 8.0 级别）就可以了，其中 Tools 下面的前三项必须安装，需要注意的是，这些 SDK 都比较大，准备好硬盘空间。</p>
+<p>一切环境配置好之后，就可以通过 <code>cordova run android</code> 来调试你的应用在 Android 系统下的表现了。</p>
+<p>当然，你想打包出来 apk 可安装文件的话，也可以通过一行命令解决：</p>
+<p><code>cordova build android</code></p>
+<p>打包成功之后的安装包可以在 “platforms → android → app → build → outputs → apk → debug” 下面找到。</p>
+<p>以上就是一个简单 APP 的打包过程。</p>
+<h3 id="如何打包-Vue-项目"><a href="#如何打包-Vue-项目" class="headerlink" title="如何打包 Vue 项目"></a>如何打包 Vue 项目</h3><p>如果我们已经编写好了 Vue 项目，想把 Vue-cli 项目打包成一个 APP，该怎么做呢？很简单，把你的 Vue 项目文件夹移到和 cordova 项目同一级的位置（这不是必须，主要是好管理），如下：</p>
+<p><img src="http://oq717k0qe.bkt.clouddn.com/18-8-29/19340332.jpg"></p>
+<p>放好之后，我们需要修改 Vue 项目的打包配置文件：</p>
+<p><code>config</code> - <code>index.js</code>:</p>
+<p><img src="http://oq717k0qe.bkt.clouddn.com/18-8-29/85892458.jpg"></p>
+<p><code>build</code> - <code>utils.js</code></p>
+<p><img src="http://oq717k0qe.bkt.clouddn.com/18-8-29/57020617.jpg"></p>
+<p>其主要目的是将 Vue 项目的打包目录设置我们我们 cordova 项目的 www 项目之下。</p>
+<p>完成之后，在 vue 项目目录下运行 <code>npm run build</code> 打包 vue 项目，完成之后，我们会发现 cordova 项目 www 文件夹下出现了我们打包出来的 dist 文件夹和 index.html 入口文件。</p>
+<p>我们回到 cordova 项目目录，在其下执行 <code>cordova build &lt;platform name&gt;</code> 就可以打包出 vue 项目了。</p>
+<p>以上就是使用 cordova 项目构建 APP 的基本过程，当然使用 cordova 的原因在于我们可以通过添加插件来拥有 Web 开发不曾拥有的原生功能体验，这些，通过学习多多尝试。</p>
+
+  </div>
+</article>
+
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF-cordova"><span class="post-toc-number">1.</span> <span class="post-toc-text">什么是 cordova</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E5%AE%89%E8%A3%85-cordova"><span class="post-toc-number">2.</span> <span class="post-toc-text">安装 cordova</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E5%88%9B%E5%BB%BA-cordova-%E7%A8%8B%E5%BA%8F"><span class="post-toc-number">3.</span> <span class="post-toc-text">创建 cordova 程序</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E5%A6%82%E4%BD%95%E6%89%93%E5%8C%85-Vue-%E9%A1%B9%E7%9B%AE"><span class="post-toc-number">4.</span> <span class="post-toc-text">如何打包 Vue 项目</span></a></li></ol>
+        </nav>
+    </aside>
+   
+    </div>
+    <footer class="footer-nav">
+      <div class="footer">
+        <span class="footer-msg">
+  
+  2020
+  
+  
+    <span class="timeDivide">-</span>
+    2021
+  
+  范永健.&nbsp;
+  Power by
+  <a href="https://hexo.io/" target="_blank" rel="external nofollow">Hexo</a>
+  and
+  <a class="orangelink" href="https://github.com/" target="_blank" rel="">
+    hexo-theme-yuzu</a>
+</span>
+
+      </div>
+    </footer>
+    <div class="back-top" id="back-top">
+      <i class="back-top-icon"></i>
+    </div>
+    
+
+  <script src="/js/jquery/jquery-3.1.1.min.js"></script>
+
+    
+<script src="/js/theme.js"></script>
+
+    
+<script src="/js/index.js"></script>
+
+
+  </div>
+</body>

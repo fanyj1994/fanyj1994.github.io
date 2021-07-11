@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <title>范永健的Blog - 不经审视的人生不值一过</title>
+    
+      <link rel="icon" href="/img/favicon.ico">
+    
+    <meta name="keyword"  content="">
+    
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <div class="loading-wrapper">
+    <div class="loading">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+  <div class="page">
+    <div class="head">
+      <header class="head-header">
+  <h1 class="head-authorH">
+    <a href="/" class="head-authorLink">
+      范永健的Blog</a>
+  </h1>
+  <div class="head-right">
+    <!-- <div class="head-search">
+      <input class="head-searchK"></input>
+      <span class="head-searchT">
+        </span>
+    </div> -->
+    <button class="barWrap" id="barWrap-toggle">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </button>
+    <div class="head-about" id="head-about">
+      
+      <a class="head-aboutLink" href="/about">
+        关于</a>
+      
+    </div>
+  </div>
+</header>
+    </div>
+    <div class="main">
+      <div class="barShow-head" id="barShow">
+  <ul class="barShow-ul">
+    
+      <li class="barShow-item">
+        <a href="/archives"><span>
+            Archives</span></a>
+      </li>
+    
+      <li class="barShow-item">
+        <a href="/categories/posts1"><span>
+            Posts1</span></a>
+      </li>
+    
+      <li class="barShow-item">
+        <a href="/categories/your-link"><span>
+            Posts2</span></a>
+      </li>
+    
+      <li class="barShow-item">
+        <a href="/tags"><span>
+            Tags</span></a>
+      </li>
+    
+  </ul>
+</div>
+      <article class="post" id="post">
+  <header class="post-head">
+    <h1 class="post-title">
+      <a class="title" href="/2017/03/02/2017-03-02-Web%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E2%80%94%E2%80%94HTTP%E6%A6%82%E8%BF%B0/">
+        Web开发学习笔记——HTTP 概述
+      </a>
+    </h1>
+  </header>
+  <div class="post-datetag">
+    <div class="post-date">
+      <time class="post-time" title="2017-03-02 09:40:00" datetime="2017-03-02T01:40:00.000Z" itemprop="datePublished">
+  2017-03-02</time>
+    </div>
+    <div class="post-tag">
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/HTTP/" rel="tag">HTTP</a></li></ul>
+
+    </div>
+  </div>
+
+  
+    <div class="post-cc">
+      版权声明：
+        
+          署名-非商业性使用-相同方式共享 | <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/2.5/cn/">CC BY-NC-SA 2.5 CN</a>
+        
+    </div>
+  
+
+  <div class="article-entry" itemprop="articleBody">
+    <p>接着了解 HTTP 的一些基本知识。</p>
+<span id="more"></span>
+<h1 id="什么是HTTP"><a href="#什么是HTTP" class="headerlink" title="什么是HTTP"></a>什么是HTTP</h1><p>如果说 TCP/IP 是一套约定计算机如何交流通信的规则的话，HTTP 起初设计的初衷则是约定客户端(Client，也就是浏览器)和主机(Host，也就是服务器)之间的通信规则，当然，现在，它不止是这个功能咯！</p>
+<p>那么，如何给 HTTP 下一个定义呢？</p>
+<p>HTTP,全称是 HyperText Transfer Protocol，翻译过来就是超文本传输协议，它是一种在<strong>client-server</strong>之间，用于传输超媒体文档的、<strong>无状态</strong> 的应用层协议。所谓的超媒体文档，指的就是 HTML 等超文本文件以及 Web 中的文本、图片、视频、脚本和样式等。而无状态，则意味着<strong>它不能够保存数据</strong>，这在电商网站的购物车功能中表现最明显，如果我们从一个页面向购物车添加了一件商品，在换一个页面后，这件商品并不会实时更新，这个问题如何解决呢？——解决办法当然是有的，就是通过 HTTP cookies，把商品信息添加 cookies 到 HTTP 头部，创建一个会话共享这个信息。</p>
+<p>HTTP 请求（request）从 client 端（浏览器）发出，到 server 端（服务器）的指定端口（默认80端口），服务器端接受到请求后，根据请求头部信息，做出响应（response），返回一个响应状态和对应的请求资源（文件、错误信息之类的）。HTTP 位于七层协议的最上层——应用层。当然，这整个过程并不只是客户端和服务器两个点的事情，期间还有路由器、调节器等许多实体节点。</p>
+<h1 id="Http-与-Https"><a href="#Http-与-Https" class="headerlink" title="Http 与 Https"></a>Http 与 Https</h1><p>我们一直谈到 http，但是，当你在浏览器中看到的 URL 中，经常会看到前面的协议名是https，那么，http 和 https 有什么关系呢？（我想绝不是 java 和 javascript 的关系滴）。</p>
+<p>在查阅了一些资料之后，我知道后面多余的 <strong>s</strong> 指的是 <strong>secure</strong>，也就是说<strong>后者是前者的安全版本</strong>。那么为什么 https 会更安全呢？原来，开发 https 的主要目的是为了在网络传输数据的过程中，保证数据的隐私和完整性。</p>
+<p>在 http 的时代，所有的网络请求对话其实是公开的，别人可以知道你们之间传输的对话内容是什么，这在今天可不得了，现在使用的密码如此之多，如果你的密码别人都能看见还了得？</p>
+<p>所以，https 出现了。它的主要设计思想是，通过<strong>在公开的网络通道上建立一条安全通道，并且通过使用一些安全证书和加密包的方式，对数据提供保护</strong>。所以，会有一些专门的机构（如 VeriSign 以及 Microsoft 等）负责颁发信任证书给网站，并且将这些信任协议预先安装在浏览器中，所以说，这两个机构相当于德高望重的值得被信赖的人。我们进入一个网站时，在浏览器地址栏的一侧，经常会有一个锁子，这个锁子就代表网站的是否安全，例如我们在 Chrome 中输入百度的网址，会看到左侧绿色的锁子和安全两个字。在 Firefox 还可以看到它的安全证书，长这样：</p>
+<p><img src="http://wx3.sinaimg.cn/mw690/bd982de7ly1fd9tr6l3ysj20go0fa3zk.jpg" alt="Firefox中的百度安全证书"></p>
+<p>可以看到证书的颁发机构是Global Sign.</p>
+<p>Https 是通过叫做 SSL/TLS 技术来加密数据包，TLS，叫做传输层安全协议(Transport Layer Security)，它的前身是 SSL，叫做安全套接层(Secure Sockets Layer)，其实，Https 历史渊源很久了，这是1994年网景推出第一代浏览器网景导航者时提出的，当时，它们就用 SSL 加密，后来 IETF 将这项技术标准化，于1999年推出 TLS。所以说，Https 的安全保障是建立在 SSL/TLS 技术的基础上的。</p>
+<p>另外，Http 和 Https 的一个区别是，前者使用 80 端口传输，而后者使用 443 端口。</p>
+<p>下面的内容是在一次完整的 HTTP 请求中的过程以及相关概念。</p>
+<ul>
+<li>请求信息（报文）</li>
+<li>回应信息（报文）</li>
+<li>请求方法（动作）</li>
+<li>状态码(status code)</li>
+</ul>
+<h1 id="请求信息（报文）"><a href="#请求信息（报文）" class="headerlink" title="请求信息（报文）"></a>请求信息（报文）</h1><p>请求信息是包含了一个 HTTP 请求的基本信息的报文，其第一行包括<strong>请求方法</strong>（下面详述），<strong>资源路径</strong>（一般指URL地址），<strong>HTTP协议版本号</strong> 三部分，下面是请求的<strong>Headers</strong>（主机名和一些告诉服务器处理信息的参数，例如接收的语言之类的）信息。另外，在 POST 等请求方法中可以出现 <strong>Body</strong> 信息，也就是发过去的数据。可以在 Chrome 的开发者工具下的 Network 面板左侧的 Name 子面板下点击网址，然后在右侧的 Headers 选项卡下查看请求信息。例如 google.com 的请求信息如下图。</p>
+<p><img src="http://wx2.sinaimg.cn/mw690/bd982de7ly1fd7rr1bd7dj20nl0eg0ud.jpg" alt="Request Headers"></p>
+<h1 id="回应信息（报文）"><a href="#回应信息（报文）" class="headerlink" title="回应信息（报文）"></a>回应信息（报文）</h1><p>回应信息是指 server 端接受到请求信息后，经过处理而返回的响应信息，和请求信息一样，它同样通过一个报文来实现，其主要内容是第一行是：<strong>HTTP协议版本号</strong>， <strong>状态码</strong>，<strong>状态信息</strong>，下面是 <strong>Headers</strong>，比请求更常见的 <strong>返回内容Body</strong> 。回应信息与请求信息的最大不同是，它会返回一个状态码和状态信息，其它的差不多意思~其实状态码和状态信息，是比较常见的。</p>
+<h1 id="状态码-Status-Code"><a href="#状态码-Status-Code" class="headerlink" title="状态码(Status Code)"></a>状态码(Status Code)</h1><blockquote>
+<p>HTTP状态码（英语：HTTP Status Code）是用以表示网页服务器HTTP响应状态的3位数字代码。它由 RFC 2616 规范定义的，并得到 RFC 2518、RFC 2817、RFC 2295、RFC 2774 与 RFC 4918 等规范扩展。 所有状态码的第一个数字代表了响应的五种状态之一。——来自<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/HTTP%E7%8A%B6%E6%80%81%E7%A0%81">维基百科</a>.</p>
+</blockquote>
+<p>那么，我们不禁要问了，这五个数字和它所对应的五种状态到底是什么呢？打个比方好了，这就像恋爱中的表白，假如一位男士写了一封极其浪漫的告白信向一个姑娘表白，那么这封信就是请求信息了，而回信则是回应信息，其中的内容就包含了状态码，接下来，我们来模拟一下，这位女士回复以下几种数字打头的信息，对应表白的成功与否。</p>
+<ul>
+<li><p><strong>1XX</strong>，以1打头的状态码表示服务器已经接受到请求，需要继续处理，这是一种临时响应状态，这种状态码是不会发送到客户端来的~也就是说，女方收到了信，她还没看呢，她总不会回一封信说：你的信我收到了，还没拆！</p>
+</li>
+<li><p><strong>2XX</strong>，以2打头的状态码代表请求已经被接收，并且完全懂了什么意思并且接受了请求。也就是说，如果男士收到的回信内容是以2打头的，那么恭喜，告白成功了！</p>
+</li>
+<li><p><strong>3XX</strong>，以3打头的状态码表示需要客户端需要进一步的操作才能完成请求<del>也就是说，这位姑娘的意思是，你必须要在北京有一套房才能答应你呢，或者说，我移居到美帝了，抓紧办签证找我吧</del></p>
+</li>
+<li><p><strong>4XX</strong>，以4打头的状态码表示客户端发生错误，妨碍了服务器的处理。这就糟糕了，你的表白信估计写的不大好，写了一大堆表扬另外一位姑娘的话，所以，告白失败！</p>
+</li>
+<li><p><strong>5XX</strong>，以5打头的状态表示服务器在处理的过程中由于某些原因发生了错误，导致请求失败。这回就是姑娘的问题，这位姑娘大概已经名花有主了，所以，告白失败！</p>
+</li>
+</ul>
+<p>一共有以上五大类状态码，其中我们最常见的状态码是 200（请求成功，数据也将会返回），301（Moved permanently，资源被永久移动到新位置了），401（当前请求需要用户验证），404（请求失败，所需的资源在服务器上没找到）。</p>
+<p>而状态信息（State message），则指的是服务器端根据状态码做出的描述性信息，这是可以自定义的，例如我们常见的“404，糟糕，你要找的页面走丢了”之类的~</p>
+<h1 id="请求方法（动作）"><a href="#请求方法（动作）" class="headerlink" title="请求方法（动作）"></a>请求方法（动作）</h1><p>请求方法，也叫请求动作，就是客户端向服务器发送请求时所用的对话方式，因为方法的不同，所能采取的操作也大大不同，HTTP 请求方法一共有8种。</p>
+<ol>
+<li><p><strong>GET</strong>.获取相关资源，这是最常见的方法之一，它只要求 URL 中包含请求资源的位置和服务器返回资源的必要信息。</p>
+</li>
+<li><p><strong>POST</strong>.向服务器提交数据，可能是添加新资源或修改已存在资源，要添加的信息包含在请求信息 Headers 中，这类方法常见情景有提交表单，上传文件等。</p>
+</li>
+<li><p><strong>PUT</strong>.更新指定资源，上传其最新版本，上传的数据仍然会包含在请求信息 Headers 中。</p>
+</li>
+<li><p><strong>DELETE</strong>.删除一个已存在的资源。</p>
+</li>
+<li><p><strong>HEAD</strong>.与 PUT 类似，只不过它不会添加信息到请求信息中，所以经常用于一些资源的检验与验证工作。</p>
+</li>
+<li><p><strong>TRACE</strong>.经常用于诊断工作。</p>
+</li>
+<li><p><strong>OPTIONS</strong>.这个方法可使服务器传回该资源所支持的所有 HTTP 请求方法。</p>
+</li>
+</ol>
+<p>其中，前四种比较常用。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>本文通过了解 HTTP 的基本概念：一个在客户端和服务器端交换超文本文件（当然还有其他功能）的应用层协议；</p>
+<p>然后接着了解了在一次 HTTP 请求中会发生什么：客户端发送一个请求信息（可能包括请求方法，资源路径，协议版本号，Headers，请求Body等），请求信息通过路由器等中间层的几微秒的漫长旅程，到达服务器（也可能到不了，404之类的你懂的），服务器接受到请求后，会根据请求 Headers 以及 Body 的内容进行相关操作（数据添加，更新，删除等），然后同样返回一个响应消息回去，这个响应消息里包含了客户端需要的信息，主要是 Body（可能是一个 HTML 页面），当然还有状态码，状态信息，Headers 等，这样，一次完整的 HTTP 请求就完成了。</p>
+<p>我们会发现，如果前面这篇<a target="_blank" rel="noopener" href="https://juejin.im/post/5ac61c3b5188255cb07d594e">Web开发学习笔记——浏览器是如何工作的</a>中我们了解了从 URL 输入地址栏开始，浏览器如何与 DNS 服务器配合，完成 URL 到 IP 的匹配过程，从而定位到服务器的位置，那么今天，我们了解的东西，则是在知道服务器的位置之后，浏览器是如何在 HTTP 协议的约定下，去完成发送与取得数据的过程。也就是说，昨天我们研究了路线，今天我们研究了在路上的故事。</p>
+<p>我们的学习过程，也将是这样一个循序渐进的过程，希望我可以踏踏实实走好每一步路，文章中的谬误之处，希望大家多多指出，不胜感激。</p>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><ul>
+<li><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E8%B6%85%E6%96%87%E6%9C%AC%E4%BC%A0%E8%BE%93%E5%8D%8F%E8%AE%AE#.E8.AF.B7.E6.B1.82.E6.96.B9.E6.B3.95">维基百科——HTTP</a></li>
+<li><a target="_blank" rel="noopener" href="https://code.tutsplus.com/tutorials/http-the-protocol-every-web-developer-must-know-part-1--net-31177">HTTP: The Protocol Every Web Developer Must Know - Part 1</a></li>
+<li><a target="_blank" rel="noopener" href="https://code.tutsplus.com/tutorials/http-the-protocol-every-web-developer-must-know-part-2--net-31155">HTTP: The Protocol Every Web Developer Must Know - Part 2</a></li>
+</ul>
+
+  </div>
+</article>
+
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFHTTP"><span class="post-toc-number">1.</span> <span class="post-toc-text">什么是HTTP</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Http-%E4%B8%8E-Https"><span class="post-toc-number">2.</span> <span class="post-toc-text">Http 与 Https</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E8%AF%B7%E6%B1%82%E4%BF%A1%E6%81%AF%EF%BC%88%E6%8A%A5%E6%96%87%EF%BC%89"><span class="post-toc-number">3.</span> <span class="post-toc-text">请求信息（报文）</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E5%9B%9E%E5%BA%94%E4%BF%A1%E6%81%AF%EF%BC%88%E6%8A%A5%E6%96%87%EF%BC%89"><span class="post-toc-number">4.</span> <span class="post-toc-text">回应信息（报文）</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E7%8A%B6%E6%80%81%E7%A0%81-Status-Code"><span class="post-toc-number">5.</span> <span class="post-toc-text">状态码(Status Code)</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E8%AF%B7%E6%B1%82%E6%96%B9%E6%B3%95%EF%BC%88%E5%8A%A8%E4%BD%9C%EF%BC%89"><span class="post-toc-number">6.</span> <span class="post-toc-text">请求方法（动作）</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E6%80%BB%E7%BB%93"><span class="post-toc-number">7.</span> <span class="post-toc-text">总结</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="post-toc-number">8.</span> <span class="post-toc-text">参考资料</span></a></li></ol>
+        </nav>
+    </aside>
+   
+    </div>
+    <footer class="footer-nav">
+      <div class="footer">
+        <span class="footer-msg">
+  
+  2020
+  
+  
+    <span class="timeDivide">-</span>
+    2021
+  
+  范永健.&nbsp;
+  Power by
+  <a href="https://hexo.io/" target="_blank" rel="external nofollow">Hexo</a>
+  and
+  <a class="orangelink" href="https://github.com/" target="_blank" rel="">
+    hexo-theme-yuzu</a>
+</span>
+
+      </div>
+    </footer>
+    <div class="back-top" id="back-top">
+      <i class="back-top-icon"></i>
+    </div>
+    
+
+  <script src="/js/jquery/jquery-3.1.1.min.js"></script>
+
+    
+<script src="/js/theme.js"></script>
+
+    
+<script src="/js/index.js"></script>
+
+
+  </div>
+</body>

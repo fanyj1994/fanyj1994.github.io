@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <title>范永健的Blog - 不经审视的人生不值一过</title>
+    
+      <link rel="icon" href="/img/favicon.ico">
+    
+    <meta name="keyword"  content="">
+    
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <div class="loading-wrapper">
+    <div class="loading">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+  <div class="page">
+    <div class="head">
+      <header class="head-header">
+  <h1 class="head-authorH">
+    <a href="/" class="head-authorLink">
+      范永健的Blog</a>
+  </h1>
+  <div class="head-right">
+    <!-- <div class="head-search">
+      <input class="head-searchK"></input>
+      <span class="head-searchT">
+        </span>
+    </div> -->
+    <button class="barWrap" id="barWrap-toggle">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </button>
+    <div class="head-about" id="head-about">
+      
+      <a class="head-aboutLink" href="/about">
+        关于</a>
+      
+    </div>
+  </div>
+</header>
+    </div>
+    <div class="main">
+      <div class="barShow-head" id="barShow">
+  <ul class="barShow-ul">
+    
+      <li class="barShow-item">
+        <a href="/archives"><span>
+            Archives</span></a>
+      </li>
+    
+      <li class="barShow-item">
+        <a href="/categories/posts1"><span>
+            Posts1</span></a>
+      </li>
+    
+      <li class="barShow-item">
+        <a href="/categories/your-link"><span>
+            Posts2</span></a>
+      </li>
+    
+      <li class="barShow-item">
+        <a href="/tags"><span>
+            Tags</span></a>
+      </li>
+    
+  </ul>
+</div>
+      <article class="post" id="post">
+  <header class="post-head">
+    <h1 class="post-title">
+      <a class="title" href="/2019/10/04/2019-10-04-JS%E5%9F%BA%E7%A1%80%E5%9B%9E%E5%BD%9203-%E8%B0%88%E8%B0%88%E9%97%AD%E5%8C%85/">
+        JS基础回归03：谈谈闭包
+      </a>
+    </h1>
+  </header>
+  <div class="post-datetag">
+    <div class="post-date">
+      <time class="post-time" title="2019-10-04 12:40:00" datetime="2019-10-04T04:40:00.000Z" itemprop="datePublished">
+  2019-10-04</time>
+    </div>
+    <div class="post-tag">
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Web/" rel="tag">Web</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a></li></ul>
+
+    </div>
+  </div>
+
+  
+    <div class="post-cc">
+      版权声明：
+        
+          署名-非商业性使用-相同方式共享 | <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/2.5/cn/">CC BY-NC-SA 2.5 CN</a>
+        
+    </div>
+  
+
+  <div class="article-entry" itemprop="articleBody">
+    <blockquote>
+<p>闭包一直是一个令广大 JS 开发者迷惑的概念，这一篇，我将一一走近作用域、作用域链、执行上下文，揭开它们的神秘面纱，以轻松理解闭包到底是个什么玩意。</p>
+</blockquote>
+<p>开始学习闭包的时候，总是容易陷入到寻找精准定义的误区中去，但是，单一地为闭包下定义，是很难理解的，因为之所以会出现闭包这个东西，和前面我们提到的这些概念息息相关：执行上下文、作用域、作用域链，理解了这些东西，才能理解闭包。</p>
+<span id="more"></span>
+<h2 id="作用域和作用域链"><a href="#作用域和作用域链" class="headerlink" title="作用域和作用域链"></a>作用域和作用域链</h2><p>在任何编程语言中，作用域都是核心概念，变量在作用域内找到归属，可以在其中自由活动，可以说，作用域是变量的领地，领地之外的人无法干涉和改变其活动。JS基于词法作用域规则，<strong>每个变量的作用域在其定义时就被确定</strong>。函数是 JS 中唯一拥有局部块级作用域的容器，函数的参数和内部的变量在局部作用域内部可访问和操作。函数的作用域同样在其定义时就被确定。</p>
+<p>当局部作用域出现与外层作用域同名变量时，会出现属性遮蔽的情况，会优先访问到局部作用域的变量。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> name = <span class="string">&#x27;Alice&#x27;</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sayHi</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> name = <span class="string">&#x27;Fan&#x27;</span></span><br><span class="line">  <span class="built_in">console</span>.log(name) <span class="comment">// Fan</span></span><br><span class="line">&#125;</span><br><span class="line">sayHi()</span><br></pre></td></tr></table></figure>
+
+<p>每一个函数都有自己的局部作用域，当多个函数嵌套定义时，他们的作用域也就会随之嵌套，形成一个作用域链。</p>
+<p>JS 的变量查找，就是沿着作用域链进行。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> name = <span class="string">&#x27;Fan&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sayName</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(name) <span class="comment">// Fan</span></span><br><span class="line">  <span class="keyword">const</span> age = <span class="number">25</span></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">sayAge</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(age) <span class="comment">// 25</span></span><br><span class="line">  &#125;</span><br><span class="line">  sayAge()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">sayName()</span><br></pre></td></tr></table></figure>
+
+<p>在上面这个例子中，两个函数<code>sayAge</code> 和 <code>sayName</code> 在创建时，形成嵌套关系，它们都会创建自己的作用域，这些作用域形成一个作用域链：</p>
+<p>sayAge -&gt; sayName -&gt; 全局作用域</p>
+<p>sayAge 在查找 age 这个变量时，会从最里层的作用域找起，可以看到，自己的作用域内部并没有声明变量 age，它会沿着作用域链向上，到最近的 sayName 中查找，在这里得到了 age 变量。</p>
+<p>可以看到，作用域链的查找方式和原型链的查找方式十分类似，区别在于，原型链查找不到时返回一个 undefined，而作用域链会报出 ReferenceError.</p>
+<p>如果在 sayName 中也找不到，就会继续向上，到全局作用域，这里也找不到，就会返回一个 ReferenceError。</p>
+<p>事实上，我们可以从技术上为理解闭包，在计算机科学中，闭包指的是这样一种机制：<strong>不管在哪里被调用，一个函数，可以访问到其作用域链上外层作用域中任意位置的变量。</strong></p>
+<p>明确作用域链的工作机制后，就很好理解函数的执行上下文了。</p>
+<h2 id="执行上下文"><a href="#执行上下文" class="headerlink" title="执行上下文"></a>执行上下文</h2><p>我们通过函数声明来定义一个函数，该函数会提升到所在作用域的最顶部，确保该函数在作用域内的任何位置都可以被调用：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sayHi(<span class="string">&#x27;Fanyj&#x27;</span>) <span class="comment">// hi, Fanyj</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sayHi</span>(<span class="params">name</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&#x27;hi, &#x27;</span> + name)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>执行上面代码，会打印出“hi, Fanyj”。可以看到，我们在函数定义之前调用函数，函数成功执行。为什么会这样？</p>
+<p>是因为，每一个函数在被<strong>执行</strong>的时候，会初始化一个<strong>执行上下文环境</strong>，这个环境里包含以下几个东西：</p>
+<ul>
+<li>this 关键字</li>
+<li>函数声明</li>
+<li>arguments：实参对象（被调用时传入的参数，未调用时为空）</li>
+<li>函数内部的变量、形参（未被赋值）等</li>
+<li><strong>对当前作用域链的引用（包含访问到的外层作用域的变量）</strong></li>
+</ul>
+<p>注意上面的第5项内容，“对当前作用域的引用”，正是这个操作，完成了函数与外部作用域的链接，形成了作用域链。</p>
+<p>我们讲，JS 中的所有函数都可以叫做闭包，因为它们都拥有对当前作用域链的引用。</p>
+<p>到了这里，一切还很正常，闭包就是保留外部作用域链的引用，而使得闭包可以访问作用域链上的所有变量而已，但是，当这个特性被花样使用之时，它的强大才能被显示出来（同时也带来了迷惑）。</p>
+<p>但在 JS 中，谈起闭包的时候，更偏向于这样一种现象，指由于函数保留了对于作用域链的引用，所以，在任何位置调用函数，都可以访问其作用域中的变量，哪怕这个变量表面上是私有的。</p>
+<h3 id="闭包到底复杂在哪里？"><a href="#闭包到底复杂在哪里？" class="headerlink" title="闭包到底复杂在哪里？"></a>闭包到底复杂在哪里？</h3><p>先看一个例子：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> name = <span class="string">&#x27;Alice&#x27;</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">bar</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> name = <span class="string">&#x27;Fan&#x27;</span></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">sayName</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(name)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> sayName</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> func = bar()</span><br><span class="line">func()</span><br></pre></td></tr></table></figure>
+
+<p>试思考，func 被调用时，会输出什么呢？</p>
+<p>上面这种情况，把一个内部函数作为另一个函数的返回值返回出去，并在外部进行调用，这正是闭包的一个经典用法。这种情况下，很容易会认为，既然函数在全局环境被调用，其访问的 name 也将会在全局作用域内查找，返回值将是 Alice。</p>
+<p>但在上面的例子中，神奇的事情发生了，我们在全局作用域访问到了位于 bar 函数局部作用域的变量 name，所以答案仍然是：Fan。发生了什么？不是说，变量只可以在作用域范围内被访问吗，那 bar 中的变量 name，为什么可以在全局作用域访问呢？</p>
+<p>如果你理解前面关于作用域的描述，就能够很容易判断出正确结果，在前面我们提到：</p>
+<p><strong>变量的作用域在其定义时就被确定</strong>。</p>
+<p>也就是说，在函数内部的变量，它会根据定义时产生的作用域链进行查找确定，和它在何处调用没有任何关系。</p>
+<p>我们换个角度来理解。在正常情况下，之所以在作用域外部访问不到内部的变量，是因为函数返回的时候，如果没有其他引用，函数执行上下文中对于作用域的引用会被垃圾回收机制回收（防止内存滥用）。所以，很多人的疑惑点在这里出现，当 bar 执行完毕，其作用域被回收，那变量 name 也就自然被回收了，那为什么还能被访问到呢？</p>
+<p>问题当然出现在返回值上，因为返回值 sayName 是一个函数，该函数拥有外层到全局作用域的全部引用，正是这个引用，阻止了外层作用域被回收。</p>
+<p>我们提到过，<strong>每一个函数每次被调用的时候，都会初始化一个新的执行上下文环境</strong>，这个环境中，包含了对作用域链的引用，作用域链是在函数<strong>定义</strong>时就确定的。也就是说，内部嵌套函数的执行环境和外部函数的执行环境是没有关系的，它们都拥有独立的执行上下文。哪怕同一个函数被多次调用，同样会创建多个独立的执行上下文。所以，外部函数执行完毕，其打算回收 name，但内部嵌套函数进行变量查找时，其走的路线是自己的上下文对象中对于作用域链的引用。</p>
+<p>所以说，最常见的对于闭包的描述是这样的：<strong>闭包指函数可以访问其所在词法作用域，保留着对上层作用域的引用，哪怕它在作用域外执行</strong>。</p>
+<p>再如果对闭包有疑惑，请默念以下三句话：</p>
+<ol>
+<li>作用域和作用域链在函数定义时就确定了</li>
+<li>每个函数在每一次调用时，都会创建属于自己的执行上下文</li>
+<li>执行上下文中包含了对于变量作用域链的引用</li>
+</ol>
+<p>事实上，只要函数在其定义的作用域外被调用（常见的形式有两种：函数作为返回值，函数作为参数传递），闭包就出现了。</p>
+<p>所以说，哪怕你根本没法解释闭包，但我相信在你的代码中，闭包已经悄悄出现很多次了。</p>
+<p>闭包在一些 JS 库中大规模应用，例如最典型的用法是 JS 模块，在一个 JS 模块中，其所有的功能被封装在内部，只向外部暴露一个接口，外界可以通过这个接口访问模块内部的数据</p>
+<h2 id="闭包的性能问题和安全问题"><a href="#闭包的性能问题和安全问题" class="headerlink" title="闭包的性能问题和安全问题"></a>闭包的性能问题和安全问题</h2><p>很明显，闭包阻止了内存回收机制对于作用域的回收，保持着对于作用域内活动对象的引用，其必定会带来多余的内存开销。所以，要避免大量使用闭包。</p>
+<p>同时，由于闭包的存在，可以在作用域外访问内部的变量，本应该销毁的变量仍然存在，这就导致了内存泄露风险。</p>
+<p>以上就是我对于闭包的理解。</p>
+<h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><ol>
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/wangfupeng1988/p/3977924.html">【推荐】深入理解javascript原型和闭包</a></li>
+<li>【Book】《JavaScript权威指南》</li>
+<li>【Book】《你不知道的JavaScript》</li>
+</ol>
+
+  </div>
+</article>
+
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E4%BD%9C%E7%94%A8%E5%9F%9F%E5%92%8C%E4%BD%9C%E7%94%A8%E5%9F%9F%E9%93%BE"><span class="post-toc-number">1.</span> <span class="post-toc-text">作用域和作用域链</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E6%89%A7%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87"><span class="post-toc-number">2.</span> <span class="post-toc-text">执行上下文</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E9%97%AD%E5%8C%85%E5%88%B0%E5%BA%95%E5%A4%8D%E6%9D%82%E5%9C%A8%E5%93%AA%E9%87%8C%EF%BC%9F"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">闭包到底复杂在哪里？</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E9%97%AD%E5%8C%85%E7%9A%84%E6%80%A7%E8%83%BD%E9%97%AE%E9%A2%98%E5%92%8C%E5%AE%89%E5%85%A8%E9%97%AE%E9%A2%98"><span class="post-toc-number">3.</span> <span class="post-toc-text">闭包的性能问题和安全问题</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">参考资料</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+   
+    </div>
+    <footer class="footer-nav">
+      <div class="footer">
+        <span class="footer-msg">
+  
+  2020
+  
+  
+    <span class="timeDivide">-</span>
+    2021
+  
+  范永健.&nbsp;
+  Power by
+  <a href="https://hexo.io/" target="_blank" rel="external nofollow">Hexo</a>
+  and
+  <a class="orangelink" href="https://github.com/" target="_blank" rel="">
+    hexo-theme-yuzu</a>
+</span>
+
+      </div>
+    </footer>
+    <div class="back-top" id="back-top">
+      <i class="back-top-icon"></i>
+    </div>
+    
+
+  <script src="/js/jquery/jquery-3.1.1.min.js"></script>
+
+    
+<script src="/js/theme.js"></script>
+
+    
+<script src="/js/index.js"></script>
+
+
+  </div>
+</body>

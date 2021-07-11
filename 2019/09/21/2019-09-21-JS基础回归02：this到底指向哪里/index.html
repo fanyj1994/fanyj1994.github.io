@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <title>范永健的Blog - 不经审视的人生不值一过</title>
+    
+      <link rel="icon" href="/img/favicon.ico">
+    
+    <meta name="keyword"  content="">
+    
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <div class="loading-wrapper">
+    <div class="loading">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+  <div class="page">
+    <div class="head">
+      <header class="head-header">
+  <h1 class="head-authorH">
+    <a href="/" class="head-authorLink">
+      范永健的Blog</a>
+  </h1>
+  <div class="head-right">
+    <!-- <div class="head-search">
+      <input class="head-searchK"></input>
+      <span class="head-searchT">
+        </span>
+    </div> -->
+    <button class="barWrap" id="barWrap-toggle">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </button>
+    <div class="head-about" id="head-about">
+      
+      <a class="head-aboutLink" href="/about">
+        关于</a>
+      
+    </div>
+  </div>
+</header>
+    </div>
+    <div class="main">
+      <div class="barShow-head" id="barShow">
+  <ul class="barShow-ul">
+    
+      <li class="barShow-item">
+        <a href="/archives"><span>
+            Archives</span></a>
+      </li>
+    
+      <li class="barShow-item">
+        <a href="/categories/posts1"><span>
+            Posts1</span></a>
+      </li>
+    
+      <li class="barShow-item">
+        <a href="/categories/your-link"><span>
+            Posts2</span></a>
+      </li>
+    
+      <li class="barShow-item">
+        <a href="/tags"><span>
+            Tags</span></a>
+      </li>
+    
+  </ul>
+</div>
+      <article class="post" id="post">
+  <header class="post-head">
+    <h1 class="post-title">
+      <a class="title" href="/2019/09/21/2019-09-21-JS%E5%9F%BA%E7%A1%80%E5%9B%9E%E5%BD%9202%EF%BC%9Athis%E5%88%B0%E5%BA%95%E6%8C%87%E5%90%91%E5%93%AA%E9%87%8C/">
+        JS基础回归02：this 到底指向哪里
+      </a>
+    </h1>
+  </header>
+  <div class="post-datetag">
+    <div class="post-date">
+      <time class="post-time" title="2019-09-21 11:40:00" datetime="2019-09-21T03:40:00.000Z" itemprop="datePublished">
+  2019-09-21</time>
+    </div>
+    <div class="post-tag">
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Web/" rel="tag">Web</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a></li></ul>
+
+    </div>
+  </div>
+
+  
+    <div class="post-cc">
+      版权声明：
+        
+          署名-非商业性使用-相同方式共享 | <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/2.5/cn/">CC BY-NC-SA 2.5 CN</a>
+        
+    </div>
+  
+
+  <div class="article-entry" itemprop="articleBody">
+    <h3 id="认识-this"><a href="#认识-this" class="headerlink" title="认识 this"></a>认识 this</h3><p>this 是 JS 中的一个关键字，有了函数就有了 this，对于 this，最直观的认识莫过于以下两种：</p>
+<ol>
+<li>它指向函数自身</li>
+<li>它指向函数的词法作用域</li>
+</ol>
+<p>这两种认识都是错误的。this 到底指向哪里，取决于<strong>函数在哪里被调用</strong>。</p>
+<span id="more"></span>
+<p>怎么讲？</p>
+<p>函数被创建的时候，this 是不存在的，this 在函数被调用时动态绑定。它代表了当前函数的执行上下文。</p>
+<h3 id="this-到底指向哪里"><a href="#this-到底指向哪里" class="headerlink" title="this 到底指向哪里"></a>this 到底指向哪里</h3><p>this 指向哪里，有一个最简单粗暴的判定方法：</p>
+<p><strong>它指向最后调用函数的对象。</strong></p>
+<p>怎么确定调用函数的对象？</p>
+<p>找到函数被调用的位置，调用的位置就是调用栈的第二位。</p>
+<p>我们举例来看：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> name = <span class="string">&#x27;Alice&#x27;</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sayName</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> name = <span class="string">&#x27;Bob&#x27;</span></span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">this</span>.name</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> obj = &#123;</span><br><span class="line">  <span class="attr">name</span>: <span class="string">&#x27;Tom&#x27;</span>,</span><br><span class="line">  <span class="attr">sayName</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">this</span>.name</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">sayName()</span><br><span class="line">obj.sayName()</span><br></pre></td></tr></table></figure>
+
+<p>我们首先看直接调用sayName的时候，它的调用位置是全局环境，这个调用等价于 <code>window.sayName()</code>，所以，this 指向 window，这时候的 <code>this.name</code> 就是 <code>window.name</code>，所以，返回了全局环境中的 name 为 Alice。</p>
+<p>在第二种调用情况中，我们可以清晰地看到最后调用函数的对象是 <code>obj</code>，所以 <code>this</code> 指的是 <code>obj</code>，<code>this.name</code> 指的是 <code>obj.name</code>，也就是 Tom。</p>
+<p>下面，我们来具体细看不同情况下的 this 指向。</p>
+<h4 id="1-默认绑定"><a href="#1-默认绑定" class="headerlink" title="1. 默认绑定"></a>1. 默认绑定</h4><p>默认绑定，就是上面例子中的第一种调用情况，直接的函数调用，前面没有任何 <code>.</code> 操作。此时，this 指向的是全局对象，在浏览器中，正是 window。</p>
+<p>要注意的是，在严格模式下，this 无法绑定全局对象，它会绑定为 undefined.</p>
+<h4 id="2-隐式绑定"><a href="#2-隐式绑定" class="headerlink" title="2. 隐式绑定"></a>2. 隐式绑定</h4><p>隐式绑定是上面例子中的第二种情况。也就是说，直观观察函数调用前面有没有其他的调用者，在上面，obj 对象调用了 sayName，所以，sayName 执行的时候，this 被绑定到 obj，所以，<code>this.name</code> 等价于 <code>obj.name</code>。</p>
+<p>在这种绑定情况中，只有调用链的最后一层才会被绑定。举个例子：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> sayName = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">this</span>.name</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> obj1 = &#123;</span><br><span class="line">  <span class="attr">name</span>: <span class="string">&#x27;Tom&#x27;</span>,</span><br><span class="line">  <span class="attr">sayName</span>: sayName</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> obj2 = &#123;</span><br><span class="line">  <span class="attr">name</span>: <span class="string">&#x27;Alice&#x27;</span>,</span><br><span class="line">  <span class="attr">obj1</span>: obj1</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(obj2.obj1.sayName()) <span class="comment">// Tom</span></span><br></pre></td></tr></table></figure>
+
+<p>在上面的调用链中，obj1 是调用的最后一环，所以，this 绑定到 obj1 身上，返回值为 Tom.</p>
+<h4 id="3-显式绑定"><a href="#3-显式绑定" class="headerlink" title="3. 显式绑定"></a>3. 显式绑定</h4><p>在 JS 中，可以在某个对象上强制调用某个函数，将 this 强制绑定到这个对象，这个工作由 <code>call()</code> 和 <code>apply()</code> 两个方法实现。</p>
+<p>这两个方法可以完成的工作类似。都接受第一个参数，作为要绑定的对象，将 this 绑定给它，后面可以传入参数。</p>
+<p>两者传参的方式稍有不同，<code>call</code> 可以一个一个地传入参数，<code>apply</code> 可以传入一个参数数组。</p>
+<p>看个例子：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> name = <span class="string">&#x27;Alice&#x27;</span></span><br><span class="line"><span class="keyword">const</span> obj = &#123;</span><br><span class="line">  <span class="attr">name</span>: <span class="string">&#x27;Tom&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sayName</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">this</span>.name</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">sayName.call(obj) <span class="comment">// Tom</span></span><br></pre></td></tr></table></figure>
+
+<p>在上面的例子中，this 通过 call 方法绑定给 obj，达到了显式地改变 this 指向的目的。</p>
+<p>JS 中还提供一个显式绑定的模式： bind 绑定，bind 函数会返回一个新的函数，它的工作是，把 this 绑定到传入的参数，并调用原始函数。</p>
+<h4 id="4-new-绑定"><a href="#4-new-绑定" class="headerlink" title="4. new 绑定"></a>4. new 绑定</h4><p>我们在<a href="JS%E5%9F%BA%E7%A1%80%E5%9B%9E%E5%BD%9201%EF%BC%9Anew%E6%93%8D%E4%BD%9C%E7%AC%A6%EF%BC%8C%E5%8E%9F%E5%9E%8B%E5%92%8C%E5%8E%9F%E5%9E%8B%E9%93%BE.md">JS基础回归01：new操作符，原型和原型链</a> 中；了解过 new 操作符的工作原理，通过构造函数新建一个实例时，this 会被绑定到这个新的实例，所以，new 操作符是改变 this 的第四种方式。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params">name</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">this</span>.name = name</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> p1 = <span class="keyword">new</span> Person(<span class="string">&#x27;Tom&#x27;</span>)</span><br><span class="line"><span class="built_in">console</span>.log(p1.name) <span class="comment">// Tom</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="5-箭头函数中的-this"><a href="#5-箭头函数中的-this" class="headerlink" title="5. 箭头函数中的 this"></a>5. 箭头函数中的 this</h4><p>ES6 中引入了箭头函数。箭头函数中的 this 指向，与前面的四种情况完全不同。事实上，箭头函数设计的主要目的就是为了解决前面这些 this 指向的纷乱情况。</p>
+<p>箭头函数中的 this，并非是被调用时确定，<strong>而是由其所在的词法作用域决定</strong>，也就是说，箭头函数的 this 是<strong>不能改变</strong>的，其表现与普通变量的查找过程一致，沿着作用域链进行查找。</p>
+<p>它沿着作用域链向上查找，知道找到第一个拥有 this 的函数，并将自己的 this 指向调用该函数的对象。举例来看：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> name = <span class="string">&#x27;Alice&#x27;</span></span><br><span class="line"><span class="keyword">const</span> obj = &#123;</span><br><span class="line">  <span class="attr">name</span>: <span class="string">&#x27;Bob&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 箭头函数中的 this 取决于 test的 this</span></span><br><span class="line">  <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> <span class="built_in">console</span>.log(<span class="built_in">this</span>.name), <span class="number">100</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">test() <span class="comment">// Alice</span></span><br><span class="line">test.call(obj) <span class="comment">// Bob</span></span><br></pre></td></tr></table></figure>
+
+<p>直接调用 test 函数时，箭头函数被执行，this 向上查找具有 this 的函数作用域，找到了全局作用域，所以，箭头函数的 this 指向 window，输出 “Alice”。</p>
+<p>当使用 call 方法调用 test 时，离箭头函数最近的函数作用域，也就是 test 的 this 被硬绑定到 obj，所以箭头函数的 this 也指向了 obj，所以输出 Bob。</p>
+<p>所以，对于箭头函数的 this 判断，需要忘记前面四种经验，单纯地从函数作用域链向上查找即可。</p>
+<h4 id="6-整体的判断思路"><a href="#6-整体的判断思路" class="headerlink" title="6. 整体的判断思路"></a>6. 整体的判断思路</h4><p>在以上的情况中，同时出现几种绑定情形时，该如何判断 this 的最终指向呢？这就涉及到这些绑定方式的优先级问题。</p>
+<p>这几种绑定方式（除了箭头函数）的优先级如下：</p>
+<p>new 绑定 &gt; 硬绑定 &gt; 隐式绑定 &gt; 默认绑定</p>
+<p>所以，遇到几种绑定方式同时出现的情况，我们可以按照如下的思路进行判断。</p>
+<ol>
+<li>函数是否是由 new 创建的实例调用。如果是，this 指向创建的新对象</li>
+<li>函数是否是显式绑定，也就是 call、apply调用，如果是，this 指向指定的新对象：<code>func.call(obj)</code>, this 指向 obj</li>
+<li>函数是否是隐式绑定，如果是，this 指向调用的上下文对象：<code>obj.func()</code>， this 指向 obj1</li>
+<li>如果不属于以上情况，则属于默认调用，this 绑定到全局对象（严格模式下，undefined）。</li>
+</ol>
+<h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://muyiy.cn/blog/3/3.2.html">JavaScript深入之重新认识箭头函数的this</a></li>
+<li>Book-你不知道的 JavaScript</li>
+</ul>
+
+  </div>
+</article>
+
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E8%AE%A4%E8%AF%86-this"><span class="post-toc-number">1.</span> <span class="post-toc-text">认识 this</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#this-%E5%88%B0%E5%BA%95%E6%8C%87%E5%90%91%E5%93%AA%E9%87%8C"><span class="post-toc-number">2.</span> <span class="post-toc-text">this 到底指向哪里</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-%E9%BB%98%E8%AE%A4%E7%BB%91%E5%AE%9A"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">1. 默认绑定</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-%E9%9A%90%E5%BC%8F%E7%BB%91%E5%AE%9A"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">2. 隐式绑定</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3-%E6%98%BE%E5%BC%8F%E7%BB%91%E5%AE%9A"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">3. 显式绑定</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#4-new-%E7%BB%91%E5%AE%9A"><span class="post-toc-number">2.4.</span> <span class="post-toc-text">4. new 绑定</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#5-%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0%E4%B8%AD%E7%9A%84-this"><span class="post-toc-number">2.5.</span> <span class="post-toc-text">5. 箭头函数中的 this</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#6-%E6%95%B4%E4%BD%93%E7%9A%84%E5%88%A4%E6%96%AD%E6%80%9D%E8%B7%AF"><span class="post-toc-number">2.6.</span> <span class="post-toc-text">6. 整体的判断思路</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="post-toc-number">3.</span> <span class="post-toc-text">参考资料</span></a></li></ol>
+        </nav>
+    </aside>
+   
+    </div>
+    <footer class="footer-nav">
+      <div class="footer">
+        <span class="footer-msg">
+  
+  2020
+  
+  
+    <span class="timeDivide">-</span>
+    2021
+  
+  范永健.&nbsp;
+  Power by
+  <a href="https://hexo.io/" target="_blank" rel="external nofollow">Hexo</a>
+  and
+  <a class="orangelink" href="https://github.com/" target="_blank" rel="">
+    hexo-theme-yuzu</a>
+</span>
+
+      </div>
+    </footer>
+    <div class="back-top" id="back-top">
+      <i class="back-top-icon"></i>
+    </div>
+    
+
+  <script src="/js/jquery/jquery-3.1.1.min.js"></script>
+
+    
+<script src="/js/theme.js"></script>
+
+    
+<script src="/js/index.js"></script>
+
+
+  </div>
+</body>

@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <title>范永健的Blog - 不经审视的人生不值一过</title>
+    
+      <link rel="icon" href="/img/favicon.ico">
+    
+    <meta name="keyword"  content="">
+    
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <div class="loading-wrapper">
+    <div class="loading">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+  <div class="page">
+    <div class="head">
+      <header class="head-header">
+  <h1 class="head-authorH">
+    <a href="/" class="head-authorLink">
+      范永健的Blog</a>
+  </h1>
+  <div class="head-right">
+    <!-- <div class="head-search">
+      <input class="head-searchK"></input>
+      <span class="head-searchT">
+        </span>
+    </div> -->
+    <button class="barWrap" id="barWrap-toggle">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </button>
+    <div class="head-about" id="head-about">
+      
+      <a class="head-aboutLink" href="/about">
+        关于</a>
+      
+    </div>
+  </div>
+</header>
+    </div>
+    <div class="main">
+      <div class="barShow-head" id="barShow">
+  <ul class="barShow-ul">
+    
+      <li class="barShow-item">
+        <a href="/archives"><span>
+            Archives</span></a>
+      </li>
+    
+      <li class="barShow-item">
+        <a href="/categories/posts1"><span>
+            Posts1</span></a>
+      </li>
+    
+      <li class="barShow-item">
+        <a href="/categories/your-link"><span>
+            Posts2</span></a>
+      </li>
+    
+      <li class="barShow-item">
+        <a href="/tags"><span>
+            Tags</span></a>
+      </li>
+    
+  </ul>
+</div>
+      <article class="post" id="post">
+  <header class="post-head">
+    <h1 class="post-title">
+      <a class="title" href="/2019/09/05/2019-09-05-JS%E5%9F%BA%E7%A1%80%E5%9B%9E%E5%BD%9201%EF%BC%9Anew%E6%93%8D%E4%BD%9C%E7%AC%A6%EF%BC%8C%E5%8E%9F%E5%9E%8B%E5%92%8C%E5%8E%9F%E5%9E%8B%E9%93%BE/">
+        JS基础回归01：new操作符，原型和原型链
+      </a>
+    </h1>
+  </header>
+  <div class="post-datetag">
+    <div class="post-date">
+      <time class="post-time" title="2019-09-05 11:40:00" datetime="2019-09-05T03:40:00.000Z" itemprop="datePublished">
+  2019-09-05</time>
+    </div>
+    <div class="post-tag">
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Web/" rel="tag">Web</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a></li></ul>
+
+    </div>
+  </div>
+
+  
+    <div class="post-cc">
+      版权声明：
+        
+          署名-非商业性使用-相同方式共享 | <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/2.5/cn/">CC BY-NC-SA 2.5 CN</a>
+        
+    </div>
+  
+
+  <div class="article-entry" itemprop="articleBody">
+    <p>本篇介绍 new 操作符的背后原理以及 JS 如何依赖原型形成原型链，完成继承。<span id="more"></span></p>
+<h3 id="new-操作符的本质"><a href="#new-操作符的本质" class="headerlink" title="new 操作符的本质"></a>new 操作符的本质</h3><p>new 操作符置于构造函数前面，来创建一个基于该构造函数的实例。其仍属于一种模拟 Java 类行为的写法，但它的本质是基于原型链的继承。</p>
+<p>JS 是基于原型的语言，并不具备“类”的概念，ES6 中的 class 属于一种语法糖，能够让开发者更好理解。</p>
+<p>这里的构造函数，既可以是 JS 已经内置的函数(String, Boolean, Object等)，也可以是我们自己定义的普通函数。我们知道，JS 自身提供了一些内置的构造函数，可以用其创建各类数据类型的实例：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 每一种数据类型都有对应的内置构造函数</span></span><br><span class="line"><span class="comment">// 注意：ES6 新增的 Symbol 类型不支持 new 新建实例</span></span><br><span class="line"><span class="keyword">const</span> str = <span class="keyword">new</span> <span class="built_in">String</span>(<span class="string">&#x27;i am a string&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> num = <span class="keyword">new</span> <span class="built_in">Number</span>(<span class="number">123</span>);</span><br></pre></td></tr></table></figure>
+
+<p>我们在实际开发中，常使用字面量形式来定义这些数据类型，两者的本质是类似的（但推荐使用后者）：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> str = <span class="string">&#x27;i am a string&#x27;</span>;</span><br><span class="line"><span class="keyword">const</span> num = <span class="number">123</span>;</span><br></pre></td></tr></table></figure>
+
+<p>对于自定义的普通函数，仍然可以通过 new 操作符创建其实例：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params">name</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">this</span>.name = name;</span><br><span class="line">  <span class="built_in">this</span>.sayName = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="built_in">this</span>.name)</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> personA = <span class="keyword">new</span> Person(<span class="string">&#x27;Jack&#x27;</span>);</span><br><span class="line">personA.sayName(); <span class="comment">// &#x27;Jack&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>如同内置函数的写法，当一个普通函数作为构造函数时，其首字母需要大写，这只是一种写法上的约定，就算你使用小写，也没错，但不推荐这么做。</p>
+<p>如上所述，new 操作符的本质，仍属于基于原型的继承行为。新建的实例拥有其构造函数原型上的所有属性和方法。下面我们具体分析 new 操作符背后发生了什么，方便更好理解其本质。</p>
+<h3 id="new-操作符背后发生了什么？"><a href="#new-操作符背后发生了什么？" class="headerlink" title="new 操作符背后发生了什么？"></a>new 操作符背后发生了什么？</h3><p>我们提到，new 操作符是在背后默默地为我们完成了一些操作，才能实现实例完整继承构造函数的效果。new 的背后其实是以下的四步操作：</p>
+<ol>
+<li>创建一个空的 JavaScript 对象：{}</li>
+<li>链接该对象和构造函数，也就是设置其原型</li>
+<li>将步骤 1 的对象作为this的上下文</li>
+<li>如果该构造函数没有返回对象，则返回 this</li>
+</ol>
+<p>详细来看，第1步很好理解，我们来看第2步是如何将空对象链接到该构造函数的？</p>
+<p>其实际的操作仍是基于原型：将空对象的 <strong>proto</strong> 属性指向构造函数的 prototype 属性，<code>&#123;&#125;.__proto__ === Constructor.prototype</code></p>
+<p>我们可以通过前面的例子进行测试：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">personA.__proto__ === Person.prototype <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+
+<p>我们暂且不纠结 <strong>proto</strong> 和 prototype 这两个属性，留待后面细解，你可以将它理解为两个插口，两个没有关系的对象，因为它们相爱走到了一起。</p>
+<p>完成连接后，这个空对象已经具备了构造函数的全部属性和方法。</p>
+<p>接下来要做的是，将该对象作为 this 的上下文，这样我们就可以通过 this 来访问该对象的所有属性和方法。</p>
+<p>最后一步，如果构造函数明确返回了一个对象，则我们的实例目前能访问到的属性和方法来自于该对象。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params">name</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">this</span>.name = name;</span><br><span class="line">  <span class="built_in">this</span>.sayName = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="built_in">this</span>.name)</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 返回一个对象</span></span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    <span class="attr">name</span>: <span class="string">&#x27;Rose&#x27;</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> personA = <span class="keyword">new</span> Person(<span class="string">&#x27;Jack&#x27;</span>);</span><br><span class="line">personA.name; <span class="comment">// &#x27;Rose&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>如果没有返回任何值，则会返回 this.</p>
+<p>若是返回一个原始类型的值，实例会忽视它，仍然拿到this.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params">name</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">this</span>.name = name;</span><br><span class="line">  <span class="built_in">this</span>.sayName = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="built_in">this</span>.name)</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="string">&#x27;my name is Bob&#x27;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> personA = <span class="keyword">new</span> Person(<span class="string">&#x27;Jack&#x27;</span>);</span><br><span class="line"><span class="built_in">console</span>.log(personA)</span><br></pre></td></tr></table></figure>
+
+<p>现在我们对于 new 的背后发生了什么，已经很清楚，就是新建一个对象，将该对象通过原型与构造函数相连，拥有构造函数返回（this 或者 显示返回的对象）的全部方法和属性。</p>
+<p>构造函数与普通函数的区别是：</p>
+<ol>
+<li>前者首字母大写，但不是必须</li>
+<li>普通函数前面加上 <code>new</code>，就是构造函数，会返回一个创建的对象，去掉 <code>new</code>，就是普通函数，会得到其 return 的值。</li>
+</ol>
+<p>我们也许会对上面第二步的操作感到疑惑，<code>__proto__</code>和<code>prototype</code>的区别和联系是什么？原型链又是怎么实现的？</p>
+<h3 id="原型、原型链及继承"><a href="#原型、原型链及继承" class="headerlink" title="原型、原型链及继承"></a>原型、原型链及继承</h3><p>首先，继承很好理解，许多语言都有这个功能，其基本的目的是，完成功能的复用。一般来讲，继承指的是面向对象的继承，在 Java 中，通过类实现继承，但在 JS 中，是没有类这个概念的，它拥有一套独立而强大的继承机制：基于原型链的继承，原型链又是基于原型这个特性实现的。</p>
+<h4 id="proto-、prototype-和-constructor"><a href="#proto-、prototype-和-constructor" class="headerlink" title="__proto__、prototype 和 constructor"></a>__proto__、prototype 和 constructor</h4><p>我们先来理清这三个概念。</p>
+<ul>
+<li><code>__proto__</code>：每一个对象都拥有一个隐式的属性<code>__proto__</code>，指向其构造函数的原型对象</li>
+<li><code>prototype</code>：<strong>只有函数才会拥有的属性</strong>，指向函数的原型对象</li>
+<li><code>constructor</code>: 每一个原型对象都拥有这个属性，指向该对象的构造函数。</li>
+</ul>
+<p>首先明确以下事实：</p>
+<ol>
+<li>JS 中的所有对象一定都有一个原型，并且继承了来自原型的所有属性和方法，而对象找到这个原型的路径就是 <code>obj.__proto__</code>。</li>
+<li>不是所有的对象都会有 <code>prototype</code> 属性，只有函数才有：<code>&#123;x: 1&#125;.prototype</code> 的值就为 undefined.</li>
+</ol>
+<p>有点绕，请仔细看看这张经典的图：</p>
+<p><img src="https://pic1.zhimg.com/80/e83bca5f1d1e6bf359d1f75727968c11_hd.jpg"></p>
+<p>我们跟着这张图和上面三句话的指引，来看看下面的简单例子：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params">name</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">this</span>.name = name;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// sayName方法属于 Person 这个构造函数的原型对象</span></span><br><span class="line">Person.prototype.sayName = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="string">`Hello, I am <span class="subst">$&#123;<span class="built_in">this</span>.name&#125;</span>`</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> p1 = <span class="keyword">new</span> Person(<span class="string">&#x27;Alice&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(p1.__proto__ === Person.prototype) <span class="comment">// true</span></span><br><span class="line"><span class="built_in">console</span>.log(Person.prototype.constructor === Person) <span class="comment">// true</span></span><br><span class="line"><span class="built_in">console</span>.log(p1.name) <span class="comment">// Alice</span></span><br><span class="line"><span class="built_in">console</span>.log(p1.sayName()) <span class="comment">// Hello, I am Alice</span></span><br></pre></td></tr></table></figure>
+
+<p>从这个简单例子中，我们可以看到，p1既拥有了 Person 的属性，也拥有了 Person 原型对象的方法。这样，三者就完成了一次继承，而这个方式，就是通过原型链实现。</p>
+<p>这条链从下游到上游依次是：p1 → Person → Person.prototype.（实际上，这个链条上游更长，Person.prototype仍然拥有自己的原型，一直到 Object.prototype）</p>
+<p>所以，我们的 new 操作符仍然是一种继承行为，但其仍属于打造原型链的过程。</p>
+<p>在这条链上面，上游的方法和属性被下游的实例所共有，同时，下游的对象可以自由定制自己的属性和方法，当上下游拥有同名的属性和方法时，就会出现“属性遮蔽”的情况：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params">name</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">this</span>.name = name;</span><br><span class="line">  <span class="built_in">this</span>.sayName = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&#x27;Hahaha, I am Bob.&#x27;</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// sayName方法属于 Person 这个构造函数的原型对象</span></span><br><span class="line">Person.prototype.sayName = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="string">`Hello, I am <span class="subst">$&#123;<span class="built_in">this</span>.name&#125;</span>`</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> p1 = <span class="keyword">new</span> Person(<span class="string">&#x27;Alice&#x27;</span>)</span><br><span class="line"><span class="built_in">console</span>.log(p1.sayName()) <span class="comment">// &quot;Hahaha, I am Bob.&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>那么，为什么会出现“属性遮蔽”的行为，这涉及到原型链的工作方式。</p>
+<p>我们提到，可以把原型链比作一个上下游的关系，这个上游可达对象的基本构造函数 Object 的原型对象：<code>Object.prototype</code>，下游可以以多种方式进行拓展，new 操作符正是其中一种。</p>
+<p>当我们访问一个下游节点的属性时，首先会<strong>优先从当前节点开始查询</strong>，在上面的例子中，p1 本身没有一个 sayName 方法，所以，它会沿着原型链，找到它的构造函数 Person。</p>
+<p>Person 内部定义了 sayName 方法，所有就返回了。如果这里也没有找到，就会继续向上查找，找到其原型对象，也就是 Person.prototype，仍然未找到，继续向上查找，一直到最后的 Object.prototype.这个对象是 null，所以到此为止。</p>
+<p>也就是说，<code>Object.prototype</code> 是对象原型链的最上游，发源地，下游的实例从这里继承了 Object 的所有实例和方法，例如 <code>toSting</code>、<code>hasOwnProperty</code>，感兴趣的同学可以在控制台打印看看。</p>
+<p>我们可以看到，正是通过 <code>__proto__</code> 以及 <code>prototype</code> 这两个属性通力合作，JS 才能实现继承，打造原型链。</p>
+<h4 id="instanceof-操作符的工作机制"><a href="#instanceof-操作符的工作机制" class="headerlink" title="instanceof 操作符的工作机制"></a>instanceof 操作符的工作机制</h4><p>看看 MDN 上对于 <code>instanceof</code> 的定义：</p>
+<blockquote>
+<p>The instanceof operator tests whether the prototype property of a constructor appears anywhere in the prototype chain of an object.<br><code>instanceof</code> 操作符检测构造函数的 prototype 属性出否出现在一个对象原型链的任何位置。</p>
+</blockquote>
+<p>换句话说：检测一个对象的原型是否出现在另一个对象的原型链上游。按前面的例子进行举例：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(p1 <span class="keyword">instanceof</span> Person) <span class="comment">// true</span></span><br><span class="line"><span class="built_in">console</span>.log(p1 <span class="keyword">instanceof</span> <span class="built_in">Object</span>) <span class="comment">// true</span></span><br><span class="line"><span class="built_in">console</span>.log(Person <span class="keyword">instanceof</span> <span class="built_in">Object</span>) <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+
+<p>那么，可以思考，<code>instanceof</code> 是如何工作的呢？</p>
+<p><strong>沿着左边对象的原型链向上查询，一直到最顶部，能找到右边对象，返回 true，反之返回 false</strong>。</p>
+<p>也就是判断 <code>left.__proto__ === right.prototype</code>，如果 <code>false</code>，沿着原型链，继续判断：</p>
+<p><code>left.__proto__.__proto__ === right</code>，一直到 Object.prototype.</p>
+<h3 id="动手实现一个-new-操作符"><a href="#动手实现一个-new-操作符" class="headerlink" title="动手实现一个 new 操作符"></a>动手实现一个 new 操作符</h3><p>我们先回顾 <code>new</code> 操作符背后做的工作：</p>
+<ol>
+<li>创建一个空的 JavaScript 对象：{}</li>
+<li>链接该对象和构造函数，也就是设置其原型</li>
+<li>将步骤 1 的对象作为this的上下文</li>
+<li>如果该构造函数没有返回对象，则返回 this</li>
+</ol>
+<p>明确了它背后发生的事情，现在我们动手亲自实现一个 <code>new</code>:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">anotherNew</span>(<span class="params">constructor</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 判断传入的值是否为构造函数</span></span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">typeof</span> <span class="title">constructor</span> !== &#x27;<span class="title">function</span>&#x27;) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">`<span class="subst">$&#123;constructor&#125;</span> is not a constructor`</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">let</span> obj = &#123;&#125;; <span class="comment">// 1.新建一个空对象</span></span><br><span class="line">  obj.__proto__ = <span class="title">constructor</span>.<span class="title">prototype</span>;</span><br><span class="line">  <span class="built_in">this</span> = obj</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h3><p>1、<a target="_blank" rel="noopener" href="https://github.com/creeperyang/blog/issues/9">https://github.com/creeperyang/blog/issues/9</a><br>2、<a target="_blank" rel="noopener" href="https://juejin.im/post/584e1ac50ce463005c618ca2">https://juejin.im/post/584e1ac50ce463005c618ca2</a><br>3、<a target="_blank" rel="noopener" href="https://juejin.im/post/5c7b963ae51d453eb173896e">https://juejin.im/post/5c7b963ae51d453eb173896e</a><br>4、<a target="_blank" rel="noopener" href="https://juejin.im/post/58f94c9bb123db411953691b">https://juejin.im/post/58f94c9bb123db411953691b</a><br>5、<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Inheritance_and_the_prototype_chain">https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Inheritance_and_the_prototype_chain</a></p>
+
+  </div>
+</article>
+
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#new-%E6%93%8D%E4%BD%9C%E7%AC%A6%E7%9A%84%E6%9C%AC%E8%B4%A8"><span class="post-toc-number">1.</span> <span class="post-toc-text">new 操作符的本质</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#new-%E6%93%8D%E4%BD%9C%E7%AC%A6%E8%83%8C%E5%90%8E%E5%8F%91%E7%94%9F%E4%BA%86%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="post-toc-number">2.</span> <span class="post-toc-text">new 操作符背后发生了什么？</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E5%8E%9F%E5%9E%8B%E3%80%81%E5%8E%9F%E5%9E%8B%E9%93%BE%E5%8F%8A%E7%BB%A7%E6%89%BF"><span class="post-toc-number">3.</span> <span class="post-toc-text">原型、原型链及继承</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#proto-%E3%80%81prototype-%E5%92%8C-constructor"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">__proto__、prototype 和 constructor</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#instanceof-%E6%93%8D%E4%BD%9C%E7%AC%A6%E7%9A%84%E5%B7%A5%E4%BD%9C%E6%9C%BA%E5%88%B6"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">instanceof 操作符的工作机制</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E5%8A%A8%E6%89%8B%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA-new-%E6%93%8D%E4%BD%9C%E7%AC%A6"><span class="post-toc-number">4.</span> <span class="post-toc-text">动手实现一个 new 操作符</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%AB%A0"><span class="post-toc-number">5.</span> <span class="post-toc-text">参考文章</span></a></li></ol>
+        </nav>
+    </aside>
+   
+    </div>
+    <footer class="footer-nav">
+      <div class="footer">
+        <span class="footer-msg">
+  
+  2020
+  
+  
+    <span class="timeDivide">-</span>
+    2021
+  
+  范永健.&nbsp;
+  Power by
+  <a href="https://hexo.io/" target="_blank" rel="external nofollow">Hexo</a>
+  and
+  <a class="orangelink" href="https://github.com/" target="_blank" rel="">
+    hexo-theme-yuzu</a>
+</span>
+
+      </div>
+    </footer>
+    <div class="back-top" id="back-top">
+      <i class="back-top-icon"></i>
+    </div>
+    
+
+  <script src="/js/jquery/jquery-3.1.1.min.js"></script>
+
+    
+<script src="/js/theme.js"></script>
+
+    
+<script src="/js/index.js"></script>
+
+
+  </div>
+</body>

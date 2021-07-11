@@ -1,0 +1,50 @@
+.content {
+  width: 73%;
+  float: right;
+}
+.content .content-pagination {
+  padding-bottom: 36px;
+}
+.content .content-pagination .prev {
+  float: left;
+}
+.content .content-pagination .prev .prev-icon {
+  display: inline-block;
+  vertical-align: -2px;
+  width: 16px;
+  height: 16px;
+  background-image: url("/img/search-gt.png");
+  background-repeat: no-repeat;
+}
+.content .content-pagination .prev a {
+  color: secondary-trans;
+  font-size: default-font-size;
+}
+.content .content-pagination .next {
+  float: right;
+}
+.content .content-pagination .next a {
+  color: secondary-trans;
+  font-size: default-font-size;
+}
+.content .content-pagination .next .next-icon {
+  display: inline-block;
+  vertical-align: -2px;
+  width: 16px;
+  height: 16px;
+  background-image: url("/img/search-lt.png");
+  background-repeat: no-repeat;
+}
+.content img {
+  max-width: 100%;
+  height: auto;
+  display: inline-block;
+  vertical-align: middle;
+}
+#index-content {
+  max-width: 850px;
+  margin: 0 auto;
+}
+#index-content .post + .post {
+  border-top: 1px solid #eee;
+}
