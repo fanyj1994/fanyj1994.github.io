@@ -1,114 +1,77 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <title>范永健的Blog - 不经审视的人生不值一过</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  
+  
+  <title>
+    Web开发学习笔记——HTTP 概述 |
     
-      <link rel="icon" href="/img/favicon.ico">
+    范永健的Blog
+  </title>
+  
+    <link rel="shortcut icon" href="/favicon.ico">
     
-    <meta name="keyword"  content="">
-    
+  
 <link rel="stylesheet" href="/css/style.css">
+
+  
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<script src="/js/pace.min.js"></script>
 
 <meta name="generator" content="Hexo 5.4.0"></head>
 
-
 <body>
-  <div class="loading-wrapper">
-    <div class="loading">
-      <span></span>
-      <span></span>
-      <span></span>
-    </div>
-  </div>
-  <div class="page">
-    <div class="head">
-      <header class="head-header">
-  <h1 class="head-authorH">
-    <a href="/" class="head-authorLink">
-      范永健的Blog</a>
-  </h1>
-  <div class="head-right">
-    <!-- <div class="head-search">
-      <input class="head-searchK"></input>
-      <span class="head-searchT">
-        </span>
-    </div> -->
-    <button class="barWrap" id="barWrap-toggle">
-      <span class="bar"></span>
-      <span class="bar"></span>
-      <span class="bar"></span>
-    </button>
-    <div class="head-about" id="head-about">
+  <main class="content">
+    <section class="outer">
+  <article id="post-2017-03-02-Web学习笔记——HTTP概述" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
       
-      <a class="head-aboutLink" href="/about">
-        关于</a>
+
+<h1 class="article-title" itemprop="name">
+  Web开发学习笔记——HTTP 概述
+</h1>
+
+
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2017/03/02/2017-03-02-Web%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E2%80%94%E2%80%94HTTP%E6%A6%82%E8%BF%B0/" class="article-date">
+  <time datetime="2017-03-02T01:40:00.000Z" itemprop="datePublished">2017-03-02</time>
+</a>
       
-    </div>
-  </div>
-</header>
-    </div>
-    <div class="main">
-      <div class="barShow-head" id="barShow">
-  <ul class="barShow-ul">
-    
-      <li class="barShow-item">
-        <a href="/archives"><span>
-            Archives</span></a>
-      </li>
-    
-      <li class="barShow-item">
-        <a href="/categories/posts1"><span>
-            Posts1</span></a>
-      </li>
-    
-      <li class="barShow-item">
-        <a href="/categories/your-link"><span>
-            Posts2</span></a>
-      </li>
-    
-      <li class="barShow-item">
-        <a href="/tags"><span>
-            Tags</span></a>
-      </li>
-    
-  </ul>
+<div class="article-category">
+  <a class="article-category-link" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>
 </div>
-      <article class="post" id="post">
-  <header class="post-head">
-    <h1 class="post-title">
-      <a class="title" href="/2017/03/02/2017-03-02-Web%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E2%80%94%E2%80%94HTTP%E6%A6%82%E8%BF%B0/">
-        Web开发学习笔记——HTTP 概述
-      </a>
-    </h1>
-  </header>
-  <div class="post-datetag">
-    <div class="post-date">
-      <time class="post-time" title="2017-03-02 09:40:00" datetime="2017-03-02T01:40:00.000Z" itemprop="datePublished">
-  2017-03-02</time>
+
     </div>
-    <div class="post-tag">
+    
+
+    
+    
+<div class="tocbot"></div>
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/HTTP/" rel="tag">HTTP</a></li></ul>
-
-    </div>
-  </div>
-
-  
-    <div class="post-cc">
-      版权声明：
-        
-          署名-非商业性使用-相同方式共享 | <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/2.5/cn/">CC BY-NC-SA 2.5 CN</a>
-        
-    </div>
-  
-
-  <div class="article-entry" itemprop="articleBody">
-    <p>接着了解 HTTP 的一些基本知识。</p>
+      
+      
+      <p>接着了解 HTTP 的一些基本知识。</p>
 <span id="more"></span>
 <h1 id="什么是HTTP"><a href="#什么是HTTP" class="headerlink" title="什么是HTTP"></a>什么是HTTP</h1><p>如果说 TCP/IP 是一套约定计算机如何交流通信的规则的话，HTTP 起初设计的初衷则是约定客户端(Client，也就是浏览器)和主机(Host，也就是服务器)之间的通信规则，当然，现在，它不止是这个功能咯！</p>
 <p>那么，如何给 HTTP 下一个定义呢？</p>
@@ -178,50 +141,167 @@
 <li><a target="_blank" rel="noopener" href="https://code.tutsplus.com/tutorials/http-the-protocol-every-web-developer-must-know-part-2--net-31155">HTTP: The Protocol Every Web Developer Must Know - Part 2</a></li>
 </ul>
 
-  </div>
-</article>
-
-    <aside class="post-widget">
-        <nav class="post-toc-wrap" id="post-toc">
-            <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFHTTP"><span class="post-toc-number">1.</span> <span class="post-toc-text">什么是HTTP</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Http-%E4%B8%8E-Https"><span class="post-toc-number">2.</span> <span class="post-toc-text">Http 与 Https</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E8%AF%B7%E6%B1%82%E4%BF%A1%E6%81%AF%EF%BC%88%E6%8A%A5%E6%96%87%EF%BC%89"><span class="post-toc-number">3.</span> <span class="post-toc-text">请求信息（报文）</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E5%9B%9E%E5%BA%94%E4%BF%A1%E6%81%AF%EF%BC%88%E6%8A%A5%E6%96%87%EF%BC%89"><span class="post-toc-number">4.</span> <span class="post-toc-text">回应信息（报文）</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E7%8A%B6%E6%80%81%E7%A0%81-Status-Code"><span class="post-toc-number">5.</span> <span class="post-toc-text">状态码(Status Code)</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E8%AF%B7%E6%B1%82%E6%96%B9%E6%B3%95%EF%BC%88%E5%8A%A8%E4%BD%9C%EF%BC%89"><span class="post-toc-number">6.</span> <span class="post-toc-text">请求方法（动作）</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E6%80%BB%E7%BB%93"><span class="post-toc-number">7.</span> <span class="post-toc-text">总结</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="post-toc-number">8.</span> <span class="post-toc-text">参考资料</span></a></li></ol>
-        </nav>
-    </aside>
-   
+      
     </div>
-    <footer class="footer-nav">
-      <div class="footer">
-        <span class="footer-msg">
-  
-  2020
-  
-  
-    <span class="timeDivide">-</span>
-    2021
-  
-  范永健.&nbsp;
-  Power by
-  <a href="https://hexo.io/" target="_blank" rel="external nofollow">Hexo</a>
-  and
-  <a class="orangelink" href="https://github.com/" target="_blank" rel="">
-    hexo-theme-yuzu</a>
-</span>
+    <footer class="article-footer">
+      <a data-url="https://www.fanyongjian.com/2017/03/02/2017-03-02-Web%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E2%80%94%E2%80%94HTTP%E6%A6%82%E8%BF%B0/" data-id="ckqzcbc7d000ygo9k1v442kch" class="article-share-link">
+        分享
+      </a>
+      
+<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/HTTP/" rel="tag">HTTP</a></li></ul>
 
-      </div>
     </footer>
-    <div class="back-top" id="back-top">
-      <i class="back-top-icon"></i>
-    </div>
-    
-
-  <script src="/js/jquery/jquery-3.1.1.min.js"></script>
-
-    
-<script src="/js/theme.js"></script>
-
-    
-<script src="/js/index.js"></script>
-
 
   </div>
+
+  
+  
+<nav class="article-nav">
+  
+  <a href="/2017/03/23/2017-03-23-%E3%80%8A%E7%A5%9E%E5%8C%BB%E5%96%9C%E6%9D%A5%E4%B9%90%E3%80%8B%E2%80%94%E2%80%94%E5%96%9C%E5%89%A7%E5%90%8E%E7%9A%84%E6%82%B2%E5%89%A7/" class="article-nav-link">
+    <strong class="article-nav-caption">前一篇</strong>
+    <div class="article-nav-title">
+      
+      《神医喜来乐》——喜剧后的悲剧
+      
+    </div>
+  </a>
+  
+  
+  <a href="/2017/03/01/2017-02-29-Web%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E2%80%94%E2%80%94%E6%B5%8F%E8%A7%88%E5%99%A8%E6%98%AF%E5%A6%82%E4%BD%95%E5%B7%A5%E4%BD%9C%E7%9A%84/" class="article-nav-link">
+    <strong class="article-nav-caption">后一篇</strong>
+    <div class="article-nav-title">Web开发学习笔记——浏览器是如何工作的</div>
+  </a>
+  
+</nav>
+
+  
+
+  
+  
+  
+  
+
+</article>
+</section>
+    <footer class="footer">
+  <div class="outer">
+    <div class="float-right">
+      <ul class="list-inline">
+  
+  <li><i class="fe fe-smile-alt"></i> <span id="busuanzi_value_site_uv"></span></li>
+  
+  <li><i class="fe fe-bookmark"></i> <span id="busuanzi_value_page_pv"></span></li>
+  
+</ul>
+    </div>
+    <ul class="list-inline">
+      <li>范永健的Blog &copy; 2021</li>
+      
+      <li>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></li>
+      <li>theme  <a target="_blank" rel="noopener" href="https://github.com/zhwangart/hexo-theme-ocean">Ocean</a></li>
+    </ul>
+  </div>
+</footer>
+  </main>
+  <aside class="sidebar">
+    <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/hexo.svg" alt="范永健的Blog"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">Home</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">Archives</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/about">About</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link nav-item-search" title="搜索">
+        <i class="fe fe-search"></i>
+        搜索
+      </a>
+    </li>
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      <div class="totop" id="totop">
+  <i class="fe fe-rocket"></i>
+</div>
+    </li>
+    <li class="nav-item">
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="fe fe-feed"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+  </aside>
+  
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/jquery.justifiedGallery.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/copybtn.js"></script>
+
+
+
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto',
+  });
+</script>
+
+
+
+<script src="/js/ocean.js"></script>
+
 </body>
+
+</html>

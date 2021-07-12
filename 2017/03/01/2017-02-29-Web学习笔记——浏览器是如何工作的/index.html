@@ -1,114 +1,77 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <title>范永健的Blog - 不经审视的人生不值一过</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  
+  
+  <title>
+    Web开发学习笔记——浏览器是如何工作的 |
     
-      <link rel="icon" href="/img/favicon.ico">
+    范永健的Blog
+  </title>
+  
+    <link rel="shortcut icon" href="/favicon.ico">
     
-    <meta name="keyword"  content="">
-    
+  
 <link rel="stylesheet" href="/css/style.css">
+
+  
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<script src="/js/pace.min.js"></script>
 
 <meta name="generator" content="Hexo 5.4.0"></head>
 
-
 <body>
-  <div class="loading-wrapper">
-    <div class="loading">
-      <span></span>
-      <span></span>
-      <span></span>
-    </div>
-  </div>
-  <div class="page">
-    <div class="head">
-      <header class="head-header">
-  <h1 class="head-authorH">
-    <a href="/" class="head-authorLink">
-      范永健的Blog</a>
-  </h1>
-  <div class="head-right">
-    <!-- <div class="head-search">
-      <input class="head-searchK"></input>
-      <span class="head-searchT">
-        </span>
-    </div> -->
-    <button class="barWrap" id="barWrap-toggle">
-      <span class="bar"></span>
-      <span class="bar"></span>
-      <span class="bar"></span>
-    </button>
-    <div class="head-about" id="head-about">
+  <main class="content">
+    <section class="outer">
+  <article id="post-2017-02-29-Web学习笔记——浏览器是如何工作的" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
       
-      <a class="head-aboutLink" href="/about">
-        关于</a>
+
+<h1 class="article-title" itemprop="name">
+  Web开发学习笔记——浏览器是如何工作的
+</h1>
+
+
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2017/03/01/2017-02-29-Web%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E2%80%94%E2%80%94%E6%B5%8F%E8%A7%88%E5%99%A8%E6%98%AF%E5%A6%82%E4%BD%95%E5%B7%A5%E4%BD%9C%E7%9A%84/" class="article-date">
+  <time datetime="2017-03-01T01:40:00.000Z" itemprop="datePublished">2017-03-01</time>
+</a>
       
-    </div>
-  </div>
-</header>
-    </div>
-    <div class="main">
-      <div class="barShow-head" id="barShow">
-  <ul class="barShow-ul">
-    
-      <li class="barShow-item">
-        <a href="/archives"><span>
-            Archives</span></a>
-      </li>
-    
-      <li class="barShow-item">
-        <a href="/categories/posts1"><span>
-            Posts1</span></a>
-      </li>
-    
-      <li class="barShow-item">
-        <a href="/categories/your-link"><span>
-            Posts2</span></a>
-      </li>
-    
-      <li class="barShow-item">
-        <a href="/tags"><span>
-            Tags</span></a>
-      </li>
-    
-  </ul>
+<div class="article-category">
+  <a class="article-category-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a>
 </div>
-      <article class="post" id="post">
-  <header class="post-head">
-    <h1 class="post-title">
-      <a class="title" href="/2017/03/01/2017-02-29-Web%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E2%80%94%E2%80%94%E6%B5%8F%E8%A7%88%E5%99%A8%E6%98%AF%E5%A6%82%E4%BD%95%E5%B7%A5%E4%BD%9C%E7%9A%84/">
-        Web开发学习笔记——浏览器是如何工作的
-      </a>
-    </h1>
-  </header>
-  <div class="post-datetag">
-    <div class="post-date">
-      <time class="post-time" title="2017-03-01 09:40:00" datetime="2017-03-01T01:40:00.000Z" itemprop="datePublished">
-  2017-03-01</time>
+
     </div>
-    <div class="post-tag">
+    
+
+    
+    
+<div class="tocbot"></div>
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%B5%8F%E8%A7%88%E5%99%A8/" rel="tag">浏览器</a></li></ul>
-
-    </div>
-  </div>
-
-  
-    <div class="post-cc">
-      版权声明：
-        
-          署名-非商业性使用-相同方式共享 | <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/2.5/cn/">CC BY-NC-SA 2.5 CN</a>
-        
-    </div>
-  
-
-  <div class="article-entry" itemprop="articleBody">
-    <p>在<a target="_blank" rel="noopener" href="https://juejin.im/post/5ac614845188255c313afba5">上一篇</a>中，我简单介绍了互联网、万维网以及网络应用这些基本概念，这一篇，我来介绍浏览器是如何工作的，或者说，一个经典的面试问题，在浏览器中输入一个网址，按下回车键，在所在地址的网页呈现出来的过程中到底发生了什么？</p>
+      
+      
+      <p>在<a target="_blank" rel="noopener" href="https://juejin.im/post/5ac614845188255c313afba5">上一篇</a>中，我简单介绍了互联网、万维网以及网络应用这些基本概念，这一篇，我来介绍浏览器是如何工作的，或者说，一个经典的面试问题，在浏览器中输入一个网址，按下回车键，在所在地址的网页呈现出来的过程中到底发生了什么？</p>
 <span id="more"></span>
 <p>在接下来的内容中，我将随着以下几个基本概念来解释这个过程，不详之处请各位指正。</p>
 <ul>
@@ -137,50 +100,167 @@
 <p>输入地址后，浏览器会通过 DNS 来查找到与这个地址相匹配的 IP 地址 192.30.253.112，发起连接请求（其实就是我们常讲的 TCP 三次握手），等待目标地址（也就是 Github 服务器）确认连接之后，浏览器会发出一个 HTTP 请求（我在下一篇中介绍 HTTP 请求的内容），Github 的服务器收到请求之后，会根据请求进行相关的响应和操作（数据查找之类的），然后会返回一个网页（HTML 页面）或者相应的数据，浏览器接到页面之后，进行解析（CSS 渲染，JS 行为添加等），然后呈现在我们面前。</p>
 <p>这就是一次简单的网络访问过程。</p>
 
-  </div>
-</article>
-
-    <aside class="post-widget">
-        <nav class="post-toc-wrap" id="post-toc">
-            <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E7%BD%91%E5%9D%80%EF%BC%88URL%EF%BC%89%E7%9A%84%E5%87%A0%E4%B8%AA%E9%83%A8%E5%88%86"><span class="post-toc-number">1.</span> <span class="post-toc-text">网址（URL）的几个部分</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#IP%E5%9C%B0%E5%9D%80-Internet-Protocol-Address"><span class="post-toc-number">2.</span> <span class="post-toc-text">IP地址(Internet Protocol Address)</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#DNS%E5%9F%9F%E5%90%8D%E7%B3%BB%E7%BB%9F-Domain-Name-System"><span class="post-toc-number">3.</span> <span class="post-toc-text">DNS域名系统(Domain Name System)</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E6%B5%8F%E8%A7%88%E5%99%A8%E7%9A%84%E5%B7%A5%E4%BD%9C"><span class="post-toc-number">4.</span> <span class="post-toc-text">浏览器的工作</span></a></li></ol>
-        </nav>
-    </aside>
-   
+      
     </div>
-    <footer class="footer-nav">
-      <div class="footer">
-        <span class="footer-msg">
-  
-  2020
-  
-  
-    <span class="timeDivide">-</span>
-    2021
-  
-  范永健.&nbsp;
-  Power by
-  <a href="https://hexo.io/" target="_blank" rel="external nofollow">Hexo</a>
-  and
-  <a class="orangelink" href="https://github.com/" target="_blank" rel="">
-    hexo-theme-yuzu</a>
-</span>
+    <footer class="article-footer">
+      <a data-url="https://www.fanyongjian.com/2017/03/01/2017-02-29-Web%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E2%80%94%E2%80%94%E6%B5%8F%E8%A7%88%E5%99%A8%E6%98%AF%E5%A6%82%E4%BD%95%E5%B7%A5%E4%BD%9C%E7%9A%84/" data-id="ckqzcbc76000qgo9khxhg08s7" class="article-share-link">
+        分享
+      </a>
+      
+<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%B5%8F%E8%A7%88%E5%99%A8/" rel="tag">浏览器</a></li></ul>
 
-      </div>
     </footer>
-    <div class="back-top" id="back-top">
-      <i class="back-top-icon"></i>
-    </div>
-    
-
-  <script src="/js/jquery/jquery-3.1.1.min.js"></script>
-
-    
-<script src="/js/theme.js"></script>
-
-    
-<script src="/js/index.js"></script>
-
 
   </div>
+
+  
+  
+<nav class="article-nav">
+  
+  <a href="/2017/03/02/2017-03-02-Web%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E2%80%94%E2%80%94HTTP%E6%A6%82%E8%BF%B0/" class="article-nav-link">
+    <strong class="article-nav-caption">前一篇</strong>
+    <div class="article-nav-title">
+      
+      Web开发学习笔记——HTTP 概述
+      
+    </div>
+  </a>
+  
+  
+  <a href="/2017/02/28/2017-02-28-Web%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E2%80%94%E2%80%94%E5%85%B3%E4%BA%8E%E4%BA%92%E8%81%94%E7%BD%91%E5%92%8C%E6%B5%8F%E8%A7%88%E5%99%A8/" class="article-nav-link">
+    <strong class="article-nav-caption">后一篇</strong>
+    <div class="article-nav-title">Web开发学习笔记——关于互联网和互联网应用</div>
+  </a>
+  
+</nav>
+
+  
+
+  
+  
+  
+  
+
+</article>
+</section>
+    <footer class="footer">
+  <div class="outer">
+    <div class="float-right">
+      <ul class="list-inline">
+  
+  <li><i class="fe fe-smile-alt"></i> <span id="busuanzi_value_site_uv"></span></li>
+  
+  <li><i class="fe fe-bookmark"></i> <span id="busuanzi_value_page_pv"></span></li>
+  
+</ul>
+    </div>
+    <ul class="list-inline">
+      <li>范永健的Blog &copy; 2021</li>
+      
+      <li>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></li>
+      <li>theme  <a target="_blank" rel="noopener" href="https://github.com/zhwangart/hexo-theme-ocean">Ocean</a></li>
+    </ul>
+  </div>
+</footer>
+  </main>
+  <aside class="sidebar">
+    <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/hexo.svg" alt="范永健的Blog"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">Home</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">Archives</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/about">About</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link nav-item-search" title="搜索">
+        <i class="fe fe-search"></i>
+        搜索
+      </a>
+    </li>
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      <div class="totop" id="totop">
+  <i class="fe fe-rocket"></i>
+</div>
+    </li>
+    <li class="nav-item">
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="fe fe-feed"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+  </aside>
+  
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/jquery.justifiedGallery.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/copybtn.js"></script>
+
+
+
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto',
+  });
+</script>
+
+
+
+<script src="/js/ocean.js"></script>
+
 </body>
+
+</html>

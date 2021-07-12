@@ -1,114 +1,77 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <title>范永健的Blog - 不经审视的人生不值一过</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  
+  
+  <title>
+    关于CSS画三角形的那些事儿 |
     
-      <link rel="icon" href="/img/favicon.ico">
+    范永健的Blog
+  </title>
+  
+    <link rel="shortcut icon" href="/favicon.ico">
     
-    <meta name="keyword"  content="">
-    
+  
 <link rel="stylesheet" href="/css/style.css">
+
+  
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<script src="/js/pace.min.js"></script>
 
 <meta name="generator" content="Hexo 5.4.0"></head>
 
-
 <body>
-  <div class="loading-wrapper">
-    <div class="loading">
-      <span></span>
-      <span></span>
-      <span></span>
-    </div>
-  </div>
-  <div class="page">
-    <div class="head">
-      <header class="head-header">
-  <h1 class="head-authorH">
-    <a href="/" class="head-authorLink">
-      范永健的Blog</a>
-  </h1>
-  <div class="head-right">
-    <!-- <div class="head-search">
-      <input class="head-searchK"></input>
-      <span class="head-searchT">
-        </span>
-    </div> -->
-    <button class="barWrap" id="barWrap-toggle">
-      <span class="bar"></span>
-      <span class="bar"></span>
-      <span class="bar"></span>
-    </button>
-    <div class="head-about" id="head-about">
+  <main class="content">
+    <section class="outer">
+  <article id="post-2017-04-19-关于CSS画三角形的那些事儿" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
       
-      <a class="head-aboutLink" href="/about">
-        关于</a>
+
+<h1 class="article-title" itemprop="name">
+  关于CSS画三角形的那些事儿
+</h1>
+
+
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2017/04/19/2017-04-19-%E5%85%B3%E4%BA%8ECSS%E7%94%BB%E4%B8%89%E8%A7%92%E5%BD%A2%E7%9A%84%E9%82%A3%E4%BA%9B%E4%BA%8B%E5%84%BF/" class="article-date">
+  <time datetime="2017-04-19T01:40:00.000Z" itemprop="datePublished">2017-04-19</time>
+</a>
       
-    </div>
-  </div>
-</header>
-    </div>
-    <div class="main">
-      <div class="barShow-head" id="barShow">
-  <ul class="barShow-ul">
-    
-      <li class="barShow-item">
-        <a href="/archives"><span>
-            Archives</span></a>
-      </li>
-    
-      <li class="barShow-item">
-        <a href="/categories/posts1"><span>
-            Posts1</span></a>
-      </li>
-    
-      <li class="barShow-item">
-        <a href="/categories/your-link"><span>
-            Posts2</span></a>
-      </li>
-    
-      <li class="barShow-item">
-        <a href="/tags"><span>
-            Tags</span></a>
-      </li>
-    
-  </ul>
+<div class="article-category">
+  <a class="article-category-link" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>
 </div>
-      <article class="post" id="post">
-  <header class="post-head">
-    <h1 class="post-title">
-      <a class="title" href="/2017/04/19/2017-04-19-%E5%85%B3%E4%BA%8ECSS%E7%94%BB%E4%B8%89%E8%A7%92%E5%BD%A2%E7%9A%84%E9%82%A3%E4%BA%9B%E4%BA%8B%E5%84%BF/">
-        关于CSS画三角形的那些事儿
-      </a>
-    </h1>
-  </header>
-  <div class="post-datetag">
-    <div class="post-date">
-      <time class="post-time" title="2017-04-19 09:40:00" datetime="2017-04-19T01:40:00.000Z" itemprop="datePublished">
-  2017-04-19</time>
+
     </div>
-    <div class="post-tag">
+    
+
+    
+    
+<div class="tocbot"></div>
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a></li></ul>
-
-    </div>
-  </div>
-
-  
-    <div class="post-cc">
-      版权声明：
-        
-          署名-非商业性使用-相同方式共享 | <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/2.5/cn/">CC BY-NC-SA 2.5 CN</a>
-        
-    </div>
-  
-
-  <div class="article-entry" itemprop="articleBody">
-    <p>用CSS画一个三角形，是不难的问题，但我却掌握的不够熟练，例如当要求为画一个直角三角形或者等腰三角形，我就有点反应不过来。所以，在这篇中点透它，以后再见，不含糊。</p>
+      
+      
+      <p>用CSS画一个三角形，是不难的问题，但我却掌握的不够熟练，例如当要求为画一个直角三角形或者等腰三角形，我就有点反应不过来。所以，在这篇中点透它，以后再见，不含糊。</p>
 <span id="more"></span>
 <h3 id="原理分析"><a href="#原理分析" class="headerlink" title="原理分析"></a>原理分析</h3><p>用CSS画三角形，实际上就是<strong>在一个框的四边上做文章</strong>，如果有一个div，为其设置100px的宽和高，并给其添加10px的黑色边框，这四条边形成一个闭合的正方形，那么这四条边如何分才能达到平均分配的效果呢？那只能是这样：</p>
 <p><img src="http://i2.muimg.com/567571/3c2fca68c1a482af.png" alt="边的分法"></p>
@@ -142,50 +105,167 @@
 
 <p>从上面的例子可以看出，运用的原理大同小异，只要灵活变通，就可以实现形态各异的图形组合。</p>
 
-  </div>
-</article>
-
-    <aside class="post-widget">
-        <nav class="post-toc-wrap" id="post-toc">
-            <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90"><span class="post-toc-number">1.</span> <span class="post-toc-text">原理分析</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E6%94%B6%E8%97%8FIcon"><span class="post-toc-number">2.</span> <span class="post-toc-text">实现一个收藏Icon</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E5%92%8C%E4%BC%AA%E5%85%83%E7%B4%A0%E7%BB%93%E5%90%88%E5%AE%9E%E7%8E%B0%E5%8F%8C%E7%AE%AD%E5%A4%B4"><span class="post-toc-number">3.</span> <span class="post-toc-text">和伪元素结合实现双箭头</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E5%AE%9E%E7%8E%B0Tips%E6%B0%94%E6%B3%A1"><span class="post-toc-number">4.</span> <span class="post-toc-text">实现Tips气泡</span></a></li></ol>
-        </nav>
-    </aside>
-   
+      
     </div>
-    <footer class="footer-nav">
-      <div class="footer">
-        <span class="footer-msg">
-  
-  2020
-  
-  
-    <span class="timeDivide">-</span>
-    2021
-  
-  范永健.&nbsp;
-  Power by
-  <a href="https://hexo.io/" target="_blank" rel="external nofollow">Hexo</a>
-  and
-  <a class="orangelink" href="https://github.com/" target="_blank" rel="">
-    hexo-theme-yuzu</a>
-</span>
+    <footer class="article-footer">
+      <a data-url="https://www.fanyongjian.com/2017/04/19/2017-04-19-%E5%85%B3%E4%BA%8ECSS%E7%94%BB%E4%B8%89%E8%A7%92%E5%BD%A2%E7%9A%84%E9%82%A3%E4%BA%9B%E4%BA%8B%E5%84%BF/" data-id="ckqzcbc7h0015go9k4zzm0h91" class="article-share-link">
+        分享
+      </a>
+      
+<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a></li></ul>
 
-      </div>
     </footer>
-    <div class="back-top" id="back-top">
-      <i class="back-top-icon"></i>
-    </div>
-    
-
-  <script src="/js/jquery/jquery-3.1.1.min.js"></script>
-
-    
-<script src="/js/theme.js"></script>
-
-    
-<script src="/js/index.js"></script>
-
 
   </div>
+
+  
+  
+<nav class="article-nav">
+  
+  <a href="/2017/05/16/2017-04-20-%E4%BB%8E%E3%80%8A%E5%AE%9A%E8%A5%BF%E5%AD%A4%E5%84%BF%E9%99%A2%E7%BA%AA%E4%BA%8B%E3%80%8B%E8%AF%B4%E8%B5%B7/" class="article-nav-link">
+    <strong class="article-nav-caption">前一篇</strong>
+    <div class="article-nav-title">
+      
+      从《定西孤儿院纪事》说起
+      
+    </div>
+  </a>
+  
+  
+  <a href="/2017/03/30/2017-03-30-%E4%BB%8E%E3%80%8A%E4%B8%87%E7%AE%AD%E7%A9%BF%E5%BF%83%E3%80%8B%E9%97%AE%E2%80%94%E2%80%94%E4%BA%BA%E7%94%9F%E7%9A%84%E5%B9%B8%E7%A6%8F%E5%92%8C%E7%97%9B%E8%8B%A6%E6%88%90%E6%AD%A3%E6%AF%94%EF%BC%9F/" class="article-nav-link">
+    <strong class="article-nav-caption">后一篇</strong>
+    <div class="article-nav-title">从《万箭穿心》问——人生的幸福和痛苦成正比？</div>
+  </a>
+  
+</nav>
+
+  
+
+  
+  
+  
+  
+
+</article>
+</section>
+    <footer class="footer">
+  <div class="outer">
+    <div class="float-right">
+      <ul class="list-inline">
+  
+  <li><i class="fe fe-smile-alt"></i> <span id="busuanzi_value_site_uv"></span></li>
+  
+  <li><i class="fe fe-bookmark"></i> <span id="busuanzi_value_page_pv"></span></li>
+  
+</ul>
+    </div>
+    <ul class="list-inline">
+      <li>范永健的Blog &copy; 2021</li>
+      
+      <li>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></li>
+      <li>theme  <a target="_blank" rel="noopener" href="https://github.com/zhwangart/hexo-theme-ocean">Ocean</a></li>
+    </ul>
+  </div>
+</footer>
+  </main>
+  <aside class="sidebar">
+    <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/hexo.svg" alt="范永健的Blog"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">Home</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">Archives</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/about">About</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link nav-item-search" title="搜索">
+        <i class="fe fe-search"></i>
+        搜索
+      </a>
+    </li>
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      <div class="totop" id="totop">
+  <i class="fe fe-rocket"></i>
+</div>
+    </li>
+    <li class="nav-item">
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="fe fe-feed"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+  </aside>
+  
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/jquery.justifiedGallery.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/copybtn.js"></script>
+
+
+
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto',
+  });
+</script>
+
+
+
+<script src="/js/ocean.js"></script>
+
 </body>
+
+</html>
