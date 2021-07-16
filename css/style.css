@@ -63,7 +63,6 @@ div {
 #header {
   padding: 58px 0 0;
   text-align: left;
-  border-bottom: 1px solid #ddd;
   position: relative; }
   #header .site-name {
     margin-bottom: 40px; }
@@ -95,9 +94,6 @@ div {
       border: 1px solid transparent; }
       #header #nav-menu a:hover {
         border-bottom-color: #444; }
-      #header #nav-menu a.current {
-        border: 1px solid #ddd;
-        border-bottom-color: #fff; }
 
 #sidebar {
   border-left: 1px solid #ddd;
@@ -150,11 +146,6 @@ div {
         line-height: 16px;
         border: 1px solid #bbb;
         width: 65%;
-        -webkit-border-radius: 5px;
-        -moz-border-radius: 5px;
-        -ms-border-radius: 5px;
-        -o-border-radius: 5px;
-        border-radius: 5px;
         -webkit-box-shadow: none;
         -moz-box-shadow: none;
         box-shadow: none; }
@@ -775,16 +766,10 @@ pre {
   color: #444;
   margin: -10px 0;
   padding: 5px 10px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
   float: right; }
-  .readmore a:after {
-    font-family: "FontAwesome";
-    content: "\f101";
-    padding-left: 0.3em; }
+
   .readmore a:hover {
-    background: #F8F8F8;
-    border-bottom-color: #D26911; }
+    border-bottom: 1px solid #666; }
 
 /* syntax highlight*/
 figure.highlight,
