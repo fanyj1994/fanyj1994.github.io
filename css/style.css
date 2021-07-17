@@ -96,7 +96,6 @@ div {
         border-bottom-color: #444; }
 
 #sidebar {
-  border-left: 1px solid #ddd;
   padding-left: 35px;
   margin-top: 40px;
   padding-bottom: 20px;
@@ -108,7 +107,6 @@ div {
       line-height: 2.7;
       margin-top: 0;
       font-size: 16px;
-      border-bottom: 1px solid #ddd;
       display: block;
       font-weight: normal; }
     #sidebar .widget .comments-title {
